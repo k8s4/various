@@ -1,0 +1,2 @@
+# Windows process mp4 to mp3/192k
+for /f "tokens=1 delims=." %a in ('dir /B *.mp4') do ffmpeg -i "%a.mp4" -vn -acodec libmp3lame -b:a 192k "%a.mp3"

@@ -1,0 +1,40 @@
+:local ddnsuser "*******"
+:local ddnspass "*******"
+:local ddnshostname "my.hostname.net" 
+:local serviceip "ipinfo.io"
+:local storepath "disk1/"
+
+:global ddnslastip
+:local str
+:local ddnsip
+
+/tool fetch url="http://$serviceip/ip" dst-path="/$storepath$serviceip"
+:delay 1
+
+
+:if ([ :typeof $ddnslastip ] = nil ) do={ :global ddnslastip "0" }
+:set ddnsip [:tostr [:pick [/file get "$storepath$serviceip" contents] 0 ([/file get "$storepath$serviceip" size] -1)]]
+
+:if ([ :typeof $ddnsip ] = nil ) do={
+   :log info ("ServiceDNS: No ip address from service $serviceip")
+
+} else={
+   :for i from=( [:len $ddnsip] - 1) to=0 do={ 
+      :if ( [:pick $ddnsip $i] = "/") do={ 
+       :set ddnsip [:pick $ddnsip 0 $i];
+      } 
+   }
+
+   :if ($ddnsip != $ddnslastip) do={
+      :log info ("ServiceDNS: $ddnshostname -> $ddnsip")
+   
+      :local str "nic/update?hostname=$ddnshostname&myip=$ddnsip"
+      /tool fetch url="http://dynupdate.no-ip.com/$str" mode=http user=$ddnsuser password=$ddnspass dst-path="/$storepath$ddnshostname"
+      :delay 1 
+
+      :log info [:tostr [/file get "$storepath$ddnshostname" contents]]
+      /file remove "$storepath$ddnshostname"
+      /file remove "$storepath$serviceip"
+      :global ddnslastip $ddnsip
+  } 
+}

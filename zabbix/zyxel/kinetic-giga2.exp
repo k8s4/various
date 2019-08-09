@@ -1,0 +1,25 @@
+#!/usr/bin/expect -f
+
+set timeout 20 
+set ip [lindex $argv 0] 
+set user [lindex $argv 1]
+set password [lindex $argv 2]
+set console "(config)>"
+
+spawn telnet "$ip" 
+while 1 { expect {
+	"Login:"	{send "$user\r"} 
+	"Password:" 	{send "$password\r"}
+	"(config)> "	{break}
+	"failed"	{send_user "Access deny.\r"; exit 1}
+	timeout		{send_user "Time out.\r"; exit 2}
+}}
+send "show version\r"
+expect "(config)>" {send "show system\r"}
+expect "(config)>" {send "show clock date\r"}
+expect "(config)>" {send "show dyndns\r"}
+expect "(config)>" {send "exit\r"}
+sleep 1
+exit 0
+
+#expect eof

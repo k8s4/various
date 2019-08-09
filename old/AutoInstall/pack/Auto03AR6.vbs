@@ -1,0 +1,15 @@
+Dim WSHShell
+Set WSHShell = WScript.CreateObject("WScript.Shell")
+Reg_Run = WSHShell.RegRead("HKLM\SOFTWARE\AutoRoScript")
+WSHShell.Run Reg_Run&"\Acrobat\AdbeRdr60_enu_full.exe"
+WScript.Sleep(150000)
+WSHShell.AppActivate("Adobe Reader")
+WshShell.SendKeys("{ENTER}")
+WScript.Sleep(1000)
+WshShell.SendKeys("{ENTER}")
+WScript.Sleep(1000)
+WshShell.SendKeys("{ENTER}")
+WScript.Sleep(1000)
+WshShell.SendKeys("{ENTER}")
+WScript.Sleep(50000)
+WshShell.SendKeys("{ENTER}")

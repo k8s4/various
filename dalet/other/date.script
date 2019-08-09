@@ -1,0 +1,5 @@
+!isNull(valueOf("pkvs_PKAirDate")) & != TD(D(23,12,1999),T(11,00,00,000))
+valueOf("pkvs_PKAirDate") != T(21,00,00,000)
+2018-09-30T21:00:00.000+00:00
+
+if(right(left(toString(valueOf("pkvs_PKAirDate")),13), 2) == "21", 1 , 0)

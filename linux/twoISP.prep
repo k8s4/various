@@ -1,0 +1,7 @@
+echo "101     isp1" >> /etc/iproute2/rt_tables
+echo "102     isp2" >> /etc/iproute2/rt_tables
+echo "121     isp1ping" >> /etc/iproute2/rt_tables
+echo "122     isp2ping" >> /etc/iproute2/rt_tables
+echo "  *  *  *  *  * root    /usr/local/bin/twoISP.sh -p" >> /etc/crontab
+echo "8.8.8.8" >> /etc/sysconfig/list.ip
+echo "8.8.4.4" >> /etc/sysconfig/list.ip

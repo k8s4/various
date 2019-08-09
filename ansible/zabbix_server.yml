@@ -1,0 +1,61 @@
+---
+- name: Configuration of zabbix agent
+  hosts: windows
+
+  vars:
+    var_ZabbixServers: 172.16.63.180
+
+
+  tasks:
+    - name: Install SmartMonTools and OpenHardwareMonitor for Windows
+      win_chocolatey:
+        name: '{{ item }}'
+        state: present
+      with_items:
+      - smartmontools
+      - openhardwaremonitor
+      - zabbix-agent
+      - bginfo
+
+    - name: Zabbix Edit Config
+      win_lineinfile:
+        dest: 'C:\ProgramData\zabbix\zabbix_agentd.conf'
+        regexp: '{{ item.regexp }}'
+        line: '{{ item.line }}'
+      with_items:
+      - { regexp: '^(.*)Server=(.*)$', line: 'Server={{ var_ZabbixServers }}'}
+      - { regexp: '^(.*)ServerActive=(.*)$', line: 'ServerActive={{ var_ZabbixServers }}'}
+      - { regexp: '^(.*)Hostname=Windows Host(.*)$', line: '#Hostname='}
+      - { regexp: '^(.*)HostnameItem=(.*)$', line: 'HostnameItem=system.hostname'}
+
+    - name: Zabbix Check Agent is installed
+      win_service:
+        name: Zabbix Agent
+      register: ZabbixAgentInfo
+      ignore_errors: yes
+
+    - name: Zabbix Install Agent as service
+      win_command: '"C:\Program Files\Zabbix Agent\zabbix_agentd.exe" --config C:\ProgramData\zabbix\zabbix_agentd.conf --install'
+      when: ZabbixAgentInfo.state is not defined or ZabbixAgentInfo.name is not defined
+
+    - name: Zabbix Start service
+      win_service:
+        name: '{{ item }}'
+        start_mode: auto
+        state: started
+      with_items:
+      - Zabbix Agent
+
+    - name: BGInfo copy config
+      win_copy:
+       src: /etc/ansible/scripts/bginfo.bgi
+       dest: 'C:\Users\Все пользователи\chocolatey\config\bginfo.bgi'
+
+#    - name: BGInfo run
+#      win_command: '"C:\Users\Все пользователи\chocolatey\bin\Bginfo.exe" "C:\Users\Все пользователи\chocolatey\config\bginfo.bgi" /timer:0'
+
+    - name: BGInfo add autorun
+      win_regedit:
+       key: HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Run
+       name: bginfo
+       data: '"C:\Users\Все пользователи\chocolatey\bin\bginfo.exe" "C:\Users\Все пользователи\chocolatey\config\bginfo.bgi" /timer:0'
