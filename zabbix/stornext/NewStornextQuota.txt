@@ -1,0 +1,47 @@
+https://10.0.0.1/sws/v2/quota/snquota?username=monitoring&password=*********&fsname=FSNAME&action=listall&format=json
+
+Key: 				snquotas.discovery
+Preprocessing: 		
+JSONPath:			$.directoryQuotas[?(@.type == 'dir')]
+LLD Macro:
+JSONPath:			$.name
+
+Key: snquotas.onfs.[{#SNQUOTAID}]
+Preprocessing: 	
+JSONPath:			$.directoryQuotas[?(@.type == 'dir')]
+JSONPath:			$.[?(@.name=='{#SNQUOTAID}')]
+
+Key: 				snquotas.onfs.hardLimit.[{#SNQUOTAID}]
+Preprocessing: 		
+JSONPath:			$.hardLimit
+JavaScript:			if (value.slice(-1) == 'T') {
+					  return(value.slice(0, -1) * 1024);
+					} else if (value.slice(-1) == 'P') {  
+					  return(value.slice(0, -1) * 1024 * 1024);
+					} else if (value.slice(-1) == 'G') {   
+					  return(value.slice(0, -1));
+					} else if (value.slice(-1) == 'M') {    
+					  return(value.slice(0, -1) / 1024);
+					} else if (value.slice(-1) == 'K') {  
+					  return(value.slice(0, -1) / 1024 / 1024);
+					} else {
+					  return(value.slice(0, -1) / 1024 / 1024 / 1024);
+					}
+					
+					
+					work_value = value.slice(0, -3).slice(2)
+					if_value = value.slice(-3).slice(0,-2)
+
+					if (if_value == 'T') {
+					  return(work_value * 1024);
+					} else if (if_value == 'P') {  
+					  return(work_value * 1024 * 1024);
+					} else if (if_value == 'G') {   
+					  return(work_value);
+					} else if (if_value == 'M') {    
+					  return(work_value / 1024);
+					} else if (if_value == 'K') {  
+					  return(work_value / 1024 / 1024);
+					} else {
+					  return(work_value / 1024 / 1024 / 1024);
+					}
