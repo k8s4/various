@@ -1,4 +1,3 @@
-
 # Maximum name lenght of group is 64 bytes!
 
 #Set-ExecutionPolicy -ExecutionPolicy RemoteSigned
@@ -6,9 +5,17 @@ Import-Module activedirectory
 
 $OrganizationalUnitDN = 'OU=NewGroups,dc=test,DC=ru'
 $ADController = "localhost"
+$timeout = 180
 $WorkingShareFull = "c:\share"
-$Levels = 3
+$DomainAdmins = "TEST\Domain Admins"
+$Levels = 2
 $LevelsChar = "\*"
+$prefix = "RU2MOS-"
+
+if (!(Test-Path $WorkingShareFull)) {
+	write-host "Working filder does not exist"
+	exit
+}
 
 
 function add-adgroup ($groupname) {
@@ -17,7 +24,22 @@ function add-adgroup ($groupname) {
 #===>>        return "Group $groupname created."
     }
     catch {
-        return "Catcher: " + "$groupname " + $_
+        return "Catcher AddGroup: " + "$groupname " + $_
+    }
+}
+
+function waitGroup($object, $timeout) {
+    while ($timeout -gt 0) {
+        Start-Sleep -Seconds 1
+        try {
+            if ((Get-ADGroup $object).Name) {
+                $timeout = 0
+                write-host "."
+            }
+        } catch {
+            write-host -NoNewline "."
+            $timeout = $timeout - 1
+        }
     }
 }
 
@@ -37,7 +59,7 @@ function add-admember ($groupname, $member) {
 	}
     }
 	catch {
-		return "Catcher: " + "$member " + $_
+		return "Catcher AddMemb: " + "$member " + $_
 	}
 }
 
@@ -73,13 +95,13 @@ function add-admember ($groupname, $member) {
 |   536870912 | GENERIC_EXECUTE              | GENERIC_EXECUTE              |
 |  1073741824 | GENERIC_WRITE                | GENERIC_WRITE                |
 +-------------+------------------------------+------------------------------+
-ContainerInherit (CI) - íàñëåäóþò êîíòåéíåðû
-ObjectInherit (OI) - íàñëåäóþò îáúåêòû
-InheritOnly (IO) - òîëüêî íàñëåäîâàíèå
-NoPropagateInherit (NP) - íå ðàñïðàñòðîíÿòü íàñëåäîâàíèå
-None - âîçäåéñòâóåò òîëüêî íà ñàì òåêóùèé îáúåêò
+ContainerInherit (CI) - Ð½Ð°ÑÐ»ÐµÐ´ÑƒÑŽÑ‚ ÐºÐ¾Ð½Ñ‚ÐµÐ¹Ð½ÐµÑ€Ñ‹
+ObjectInherit (OI) - Ð½Ð°ÑÐ»ÐµÐ´ÑƒÑŽÑ‚ Ð¾Ð±ÑŠÐµÐºÑ‚Ñ‹
+InheritOnly (IO) - Ñ‚Ð¾Ð»ÑŒÐºÐ¾ Ð½Ð°ÑÐ»ÐµÐ´Ð¾Ð²Ð°Ð½Ð¸Ðµ
+NoPropagateInherit (NP) - Ð½Ðµ Ñ€Ð°ÑÐ¿Ñ€Ð°ÑÑ‚Ñ€Ð¾Ð½ÑÑ‚ÑŒ Ð½Ð°ÑÐ»ÐµÐ´Ð¾Ð²Ð°Ð½Ð¸Ðµ
+None - Ð²Ð¾Ð·Ð´ÐµÐ¹ÑÑ‚Ð²ÑƒÐµÑ‚ Ñ‚Ð¾Ð»ÑŒÐºÐ¾ Ð½Ð° ÑÐ°Ð¼ Ñ‚ÐµÐºÑƒÑ‰Ð¸Ð¹ Ð¾Ð±ÑŠÐµÐºÑ‚
 
-This folder only - áåç ôëàãîâ. Ïî óìîë÷àíèþ ïðè íàçíà÷åíèè ïðàâà íàçíà÷àþòñÿ òîëüêî íà äàííûé îáúåêò.
+This folder only - Ð±ÐµÐ· Ñ„Ð»Ð°Ð³Ð¾Ð². ÐŸÐ¾ ÑƒÐ¼Ð¾Ð»Ñ‡Ð°Ð½Ð¸ÑŽ Ð¿Ñ€Ð¸ Ð½Ð°Ð·Ð½Ð°Ñ‡ÐµÐ½Ð¸Ð¸ Ð¿Ñ€Ð°Ð²Ð° Ð½Ð°Ð·Ð½Ð°Ñ‡Ð°ÑŽÑ‚ÑÑ Ñ‚Ð¾Ð»ÑŒÐºÐ¾ Ð½Ð° Ð´Ð°Ð½Ð½Ñ‹Ð¹ Ð¾Ð±ÑŠÐµÐºÑ‚.
 This folder, subfolders and Files - CI, OI, None
 This folder and subfolders - CI, None
 This folder and files - OI, None
@@ -95,11 +117,11 @@ function add-group2fs ($path, $object, $permissions, $inherit) {
 #Permissions: 	FullControl, ReadAndExecute, Modify
 	if (!$inherit) { $inherit = "ContainerInherit, ObjectInherit" }
 	try {
-		$principal = (Get-ADGroup $object).Name
+		$principal = $object #(Get-ADGroup -Server $ADController $object).Name
 #		$FileSystemAccessRights = [System.Security.AccessControl.FileSystemRights]"FullControl"
 #		$InheritanceFlags = [system.security.accesscontrol.InheritanceFlags]"ContainerInherit, ObjectInherit"
 #		$PropagationFlags = [system.security.accesscontrol.PropagationFlags]"InheritOnly"
-#		$OwnerPrincipal = [System.Security.Principal.NTAccount]“Administrators”
+#		$OwnerPrincipal = [System.Security.Principal.NTAccount]â€œAdministratorsâ€
 #		$AccessRule = New-Object System.Security.AccessControl.FileSystemAccessRule($principal, $FileSystemAccessRights, $InheritanceFlags, $PropagationFlags, "Allow")
 		$AccessRule = New-Object System.Security.AccessControl.FileSystemAccessRule($principal, "$permissions", $inherit, "None", "Allow")
 		$acl = Get-Acl $path #(Get-Item $path).GetAccessControl('Access')
@@ -109,7 +131,7 @@ function add-group2fs ($path, $object, $permissions, $inherit) {
 #		return "Member $principal added to folder $path with $permissions permissions."
 	}
 	catch {
-		return "Catcher: " + $_
+		return "Catcher AddGrp2FS: Obj: $object : " + $_
 	}
 }
 
@@ -117,72 +139,72 @@ function translit([string]$inString)
 {
     #Dependency table
     $translit = @{
-    [char]'à' = "a"
-    [char]'À' = "A"
-    [char]'á' = "b"
-    [char]'Á' = "B"
-    [char]'â' = "v"
-    [char]'Â' = "V"
-    [char]'ã' = "g"
-    [char]'Ã' = "G"
-    [char]'ä' = "d"
-    [char]'Ä' = "D"
-    [char]'å' = "e"
-    [char]'Å' = "E"
-    [char]'¸' = "yo"
-    [char]'¨' = "Yo"
-    [char]'æ' = "zh"
-    [char]'Æ' = "Zh"
-    [char]'ç' = "z"
-    [char]'Ç' = "Z"
-    [char]'è' = "i"
-    [char]'È' = "I"
-    [char]'é' = "j"
-    [char]'É' = "J"
-    [char]'ê' = "k"
-    [char]'Ê' = "K"
-    [char]'ë' = "l"
-    [char]'Ë' = "L"
-    [char]'ì' = "m"
-    [char]'Ì' = "M"
-    [char]'í' = "n"
-    [char]'Í' = "N"
-    [char]'î' = "o"
-    [char]'Î' = "O"
-    [char]'ï' = "p"
-    [char]'Ï' = "P"
-    [char]'ð' = "r"
-    [char]'Ð' = "R"
-    [char]'ñ' = "s"
-    [char]'Ñ' = "S"
-    [char]'ò' = "t"
-    [char]'Ò' = "T"
-    [char]'ó' = "u"
-    [char]'Ó' = "U"
-    [char]'ô' = "f"
-    [char]'Ô' = "F"
-    [char]'õ' = "h"
-    [char]'Õ' = "H"
-    [char]'ö' = "c"
-    [char]'Ö' = "C"
-    [char]'÷' = "ch"
-    [char]'×' = "Ch"
-    [char]'ø' = "sh"
-    [char]'Ø' = "Sh"
-    [char]'ù' = "sch"
-    [char]'Ù' = "Sch"
-    [char]'ú' = ""
-    [char]'Ú' = ""
-    [char]'û' = "y"
-    [char]'Û' = "Y"
-    [char]'ü' = ""
-    [char]'Ü' = ""
-    [char]'ý' = "e"
-    [char]'Ý' = "E"
-    [char]'þ' = "yu"
-    [char]'Þ' = "Yu"
-    [char]'ÿ' = "ya"
-    [char]'ß' = "Ya"
+    [char]'Ð°' = "a"
+    [char]'Ð' = "A"
+    [char]'Ð±' = "b"
+    [char]'Ð‘' = "B"
+    [char]'Ð²' = "v"
+    [char]'Ð’' = "V"
+    [char]'Ð³' = "g"
+    [char]'Ð“' = "G"
+    [char]'Ð´' = "d"
+    [char]'Ð”' = "D"
+    [char]'Ðµ' = "e"
+    [char]'Ð•' = "E"
+    [char]'Ñ‘' = "y"
+    [char]'Ð' = "Y"
+    [char]'Ð¶' = "z"
+    [char]'Ð–' = "Z"
+    [char]'Ð·' = "z"
+    [char]'Ð—' = "Z"
+    [char]'Ð¸' = "i"
+    [char]'Ð˜' = "I"
+    [char]'Ð¹' = "j"
+    [char]'Ð™' = "J"
+    [char]'Ðº' = "k"
+    [char]'Ðš' = "K"
+    [char]'Ð»' = "l"
+    [char]'Ð›' = "L"
+    [char]'Ð¼' = "m"
+    [char]'Ðœ' = "M"
+    [char]'Ð½' = "n"
+    [char]'Ð' = "N"
+    [char]'Ð¾' = "o"
+    [char]'Ðž' = "O"
+    [char]'Ð¿' = "p"
+    [char]'ÐŸ' = "P"
+    [char]'Ñ€' = "r"
+    [char]'Ð ' = "R"
+    [char]'Ñ' = "s"
+    [char]'Ð¡' = "S"
+    [char]'Ñ‚' = "t"
+    [char]'Ð¢' = "T"
+    [char]'Ñƒ' = "u"
+    [char]'Ð£' = "U"
+    [char]'Ñ„' = "f"
+    [char]'Ð¤' = "F"
+    [char]'Ñ…' = "h"
+    [char]'Ð¥' = "H"
+    [char]'Ñ†' = "c"
+    [char]'Ð¦' = "C"
+    [char]'Ñ‡' = "c"
+    [char]'Ð§' = "C"
+    [char]'Ñˆ' = "s"
+    [char]'Ð¨' = "S"
+    [char]'Ñ‰' = "s"
+    [char]'Ð©' = "S"
+    [char]'ÑŠ' = ""
+    [char]'Ðª' = ""
+    [char]'Ñ‹' = "y"
+    [char]'Ð«' = "Y"
+    [char]'ÑŒ' = ""
+    [char]'Ð¬' = ""
+    [char]'Ñ' = "e"
+    [char]'Ð­' = "E"
+    [char]'ÑŽ' = "y"
+    [char]'Ð®' = "Y"
+    [char]'Ñ' = "y"
+    [char]'Ð¯' = "Y"
     [char]'/' = "_"
     [char]'\' = "_"
     [char]'[' = "_"
@@ -240,67 +262,89 @@ function inhiton($path) {
 }
 
 # Remove all permissions Except inherited
-function removePerm($path) {
+function removePerm($path, $identity) {
 	$acl = (Get-Acl $path)
-	$accessToRemove = $acl.Access | ?{ $_.IsInherited -eq $false }
+    if ($identity -eq 1) {
+	    $accessToRemove = $acl.Access | ?{ $_.IsInherited -eq $false }
+    } else {
+	    $accessToRemove = $acl.Access | ?{ $_.IsInherited -eq $false -and $_.IdentityReference -eq $identity}
+    }
 	if ($accessToRemove) {
 		foreach ($item in $accessToRemove) {
 		    $acl.RemoveAccessRuleAll($item)
 		}
 		Set-Acl -AclObject $acl $path
-	}
+	} 
 }
 
 
 # Get permissions from ntfs, create AD group, add members to AD group
 function retrAndSetPerm($path, $pathroot) {
-	$nameforad = translit(($path -replace ((Split-Path $pathroot) -replace "\\","\\"), "") -replace "^\\", "")
-	$pathupper = translit(((Split-Path $path) -replace ((Split-Path $pathroot) -replace "\\","\\"), "") -replace "^\\", "")
+    write-host -NoNewline "===> Working with $path"
+	if ($path -eq $pathroot) {
+		#$nameforad = translit(($path -replace ((Split-Path $pathroot) -replace "\\","\\"), "") -replace "^\\", "")
+		#$pathupper = translit(((Split-Path $path) -replace ((Split-Path $pathroot) -replace "\\","\\"), "") -replace "^\\", "")
+	} else {
+		$nameforad = $prefix + (translit(($path -replace (($pathroot) -replace "\\","\\"), "") -replace "^\\", ""))
+		$pathupper = $prefix + (translit(((Split-Path $path) -replace (($pathroot) -replace "\\","\\"), "") -replace "^\\", ""))
+		$pathupperif = (translit(((Split-Path $path) -replace (($pathroot) -replace "\\","\\"), "") -replace "^\\", ""))
+	}
 
 	# Turn On Inheritance
 	#inhiton $path
-	write-host "inhiton $path"
+	#write-host "inhiton $path"
 
 	# Create groups
-	#add-adgroup "$($nameforad)_FC"
-	#add-adgroup "$($nameforad)_RW"
-	#add-adgroup "$($nameforad)_RO"
-	#add-adgroup "$($nameforad)_TR"
+	add-adgroup "$($nameforad)_F"
+	add-adgroup "$($nameforad)_C"
+	add-adgroup "$($nameforad)_R"
+	add-adgroup "$($nameforad)_S"
 
-	write-host "add-adgroup $($nameforad) _FC"
-	write-host "add-adgroup $($nameforad) _RW"
-	write-host "add-adgroup $($nameforad) _RO"
-	write-host "add-adgroup $($nameforad) _TR"
+    waitGroup "$($nameforad)_F" $timeout
+    waitGroup "$($nameforad)_C" $timeout
+    waitGroup "$($nameforad)_R" $timeout
+    waitGroup "$($nameforad)_S" $timeout
 
-	if ($pathupper) {
-		add-admember "$($pathupper)_TR" "$($nameforad)_FC" 
-		add-admember "$($pathupper)_TR" "$($nameforad)_RW" 
-		add-admember "$($pathupper)_TR" "$($nameforad)_RO" 
-		add-admember "$($pathupper)_TR" "$($nameforad)_TR" 
+	if ($pathupperif) {
+		add-admember "$($pathupper)_S" "$($nameforad)_F" 
+		add-admember "$($pathupper)_S" "$($nameforad)_C" 
+		add-admember "$($pathupper)_S" "$($nameforad)_R" 
+		add-admember "$($pathupper)_S" "$($nameforad)_S" 
 	}
+    
+	add-group2fs "$path" $DomainAdmins "FullControl"
 
-        # Fill created groups
+    # Fill created groups
 	foreach ($item in ((Get-Acl $path).Access | ?{ $_.IsInherited -eq $false }) ) {
+        if ($item.IdentityReference -like "CREATOR OWNER*") { 
+        } elseif ($item.IdentityReference -like "BUILTIN*") { 
+        } elseif ($item.IdentityReference -like $DomainAdmins) { 
+        } else {
             if ($item.FileSystemRights -like "*FullControl*") {
-                add-admember "$($nameforad)_FC" $item.IdentityReference
+                add-admember "$($nameforad)_F" $item.IdentityReference
+                removePerm $path $item.IdentityReference
     		} elseif ($item.FileSystemRights -like "*Modify*") {
-        		add-admember "$($nameforad)_RW" $item.IdentityReference
+        		add-admember "$($nameforad)_C" $item.IdentityReference
+                removePerm $path $item.IdentityReference
     		} elseif ($item.FileSystemRights -like "*ReadAndExecute*") {
-        		add-admember "$($nameforad)_RO" $item.IdentityReference
+        		add-admember "$($nameforad)_R" $item.IdentityReference
+                removePerm $path $item.IdentityReference
     		} else {
         		write-host "Object $($item.IdentityReference) did not added to $path because permissions is $($item.FileSystemRights)" 
         	}	
+        }
 	}
 
-	# Remove all permissions Except inherited
-	removePerm $path
-	
-	# Add created groups to ntfs
-	add-group2fs "$path" "$($nameforad)_FC" "FullControl"
-	add-group2fs "$path" "$($nameforad)_RW" "Modify"
-	add-group2fs "$path" "$($nameforad)_RO" "ReadAndExecute"
-	add-group2fs "$path" "$($nameforad)_TR" "33" "None"
+    Start-Sleep -Seconds 15
 
+    # Add created groups to ntfs
+	add-group2fs "$path" "$($nameforad)_F" "FullControl"
+	add-group2fs "$path" "$($nameforad)_C" "Modify"
+	add-group2fs "$path" "$($nameforad)_R" "ReadAndExecute"
+	add-group2fs "$path" "$($nameforad)_S" "33" "None"
+
+	# Remove all permissions Except inherited
+	#removePerm $path "1"
 }
 
 
@@ -311,13 +355,12 @@ clear
 
 for ($i=0; $i -le $Levels; $i++) {
 	if ($i -eq 0) {
-		$FullName = get-item $WorkingShareFull | %{ $_.FullName}
+		#$FullName = get-item $WorkingShareFull | %{ $_.FullName}
 	} else {
 		$FullName = get-childitem ($WorkingShareFull + $LevelsChar * $i) | ?{$_.PSIsContainer} | %{ $_.FullName}
-	}
-#===>>	write-host "Directory:" $FullName
-	foreach ($FullNameItem in $FullName) {
-		retrAndSetPerm $FullNameItem $WorkingShareFull
+		foreach ($FullNameItem in $FullName) {
+			retrAndSetPerm $FullNameItem $WorkingShareFull
+		}
 	}
 }
 
@@ -325,21 +368,16 @@ for ($i=0; $i -le $Levels; $i++) {
 
 
 
-
 <#
-#add-adgroup "$(translit($WorkingShare))_TR"
-#add-group2fs $WorkingShareFull "$(translit($WorkingShare))_TR" "33" "ContainerInherit"
+#add-adgroup "$(translit($WorkingShare))_S"
+#add-group2fs $WorkingShareFull "$(translit($WorkingShare))_S" "33" "ContainerInherit"
 
 
-
-
-
-translit ("eewefgöóàöóàöêöóåïàóöïå42ê2345234ó(*)*?(-=-_=+;:[]{}\/*&7^?/.,")
+translit ("eewefgÑ†ÑƒÐ°Ñ†ÑƒÐ°Ñ†ÐºÑ†ÑƒÐµÐ¿Ð°ÑƒÑ†Ð¿Ðµ42Ðº2345234Ñƒ(*)*?(-=-_=+;:[]{}\/*&7^?/.,")
 add-adgroup "testttt"
 add-admember "testttt" "Vasiliy"
 add-group2fs "$WorkingShare" "LocalGroup" "ReadAndExecute"
 inhitoff "$WorkingShare"
-inhiton "$WorkingShare"
 retrAndSetPerm $WorkingShareFull $WorkingShareFull
 removePerm $path
 
