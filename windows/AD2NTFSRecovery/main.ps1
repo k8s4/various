@@ -44,22 +44,36 @@ function waitGroup($object, $timeout) {
 }
 
 function add-admember ($groupname, $member) {
-    try {
+	# If given Identity with domain prefix then cut domain else use as is
 	if ($member -like "*\*") { 
 		$member = ($member.Value).Split("\",2) 
-		if ($member[0] -eq (Get-ADDomain).NetBIOSName -and $groupname -ne $member[1]) {
-			Add-AdGroupMember -Identity $groupname -Members $member[1]
-#===>>			return "Member $member added to group $groupname."
-		}
-	} elseif ($groupname -ne $member) {
-		Add-AdGroupMember -Identity $groupname -Members $member
-#===>>		return "Member $member added to group $groupname."
-	} else {
-		return "Member $member can not added to istself or member not in working domain."
+		if ($member[0] -eq (Get-ADDomain).NetBIOSName -and $groupname -ne $member[1]) { 
+			$member = $member[1] 
+		} 
+	} elseif ($groupname -ne $member) { 
+	} else { 
+		return "Member $member can not added to istself or member not in working domain." 
 	}
-    }
-	catch {
-		return "Catcher AddMemb: " + "$member " + $_
+	# Get type of AD object
+	$check = ((get-adobject -filter *) | ?{$_.name -like $member}).objectclass
+	#	write-host "$check - $member"
+	# If type is user add it to group
+	if ($check -eq "User") { 
+		try {
+			Add-AdGroupMember -Identity $groupname -Members $member
+			#===>> return "Member $member added to group $groupname."
+		}
+		catch {
+			return "Catcher: Add $member to group $groupname  " + $_
+		}
+	# If type is group then get members and call oneself
+	} elseif ($check -eq "Group") {
+		foreach ($item in Get-ADGroupMember $member) {
+			# write-host $item.name
+			add-admember $groupname $item.name
+		}
+	} else {
+		write-host "Member $member can not added to group $groupname because it not found or had different type than User or Group."
 	}
 }
 
