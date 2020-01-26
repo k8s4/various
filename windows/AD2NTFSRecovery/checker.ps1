@@ -1,5 +1,5 @@
-$WorkingShareFull = "c:\share"
-$Levels = 3
+$WorkingShareFull = "F:\FileServer"
+$Levels = 2
 $LevelsChar = "\*"
 
 
@@ -10,10 +10,9 @@ for ($i=0; $i -le $Levels; $i++) {
 		$FullName = get-childitem ($WorkingShareFull + $LevelsChar * $i) | ?{$_.PSIsContainer} | %{ $_.FullName}  
 	}
 	foreach ($FullNameItem in $FullName) {
-		if ($FullNameItem.Length -gt 64) {
-			write-host "Warning!!! Folder path $FullNameItem more 64, so I can not create group"
+		if (($FullNameItem.Length - 13) -gt 50) {
+			write-host "$FullNameItem"
 		}
 #		write-host $FullNameItem
 	}
 }
-
