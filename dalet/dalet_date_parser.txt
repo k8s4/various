@@ -1,0 +1,9 @@
+left(toString(valueOf("Anons_AIR_End_Date")),4)
++"/"+
+if(right(left(toString(valueOf("Anons_AIR_End_Date")),7),1) == "-",
+"0"+right(left(toString(valueOf("Anons_AIR_End_Date")),6),1),
+right(left(toString(valueOf("Anons_AIR_End_Date")),7),2))
++"/"+
+if(left(right(toString(valueOf("Anons_AIR_End_Date")),2),1) == "-",
+"0"+right(toString(valueOf("Anons_AIR_End_Date")),1),
+right(toString(valueOf("Anons_AIR_End_Date")),2))
