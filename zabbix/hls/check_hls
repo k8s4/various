@@ -6,9 +6,10 @@ import json
 import m3u8
 import requests
 
-base_url = 'https://domain.local/playlist.m3u8'
+#base_url = 'https://testdomain/playlist.m3u8'
+#base_url = 'https://testdomain.local/chunklist_b4628000_slru.m3u8'
 temp_dir = '/tmp'
-ffprobe = '/usr/bin/ffprobe'
+ffprobe = '/usr/bin/ffprobe1'
 
 # Discovery function
 def discovery():
@@ -18,7 +19,7 @@ def discovery():
     if playlists:
         for pl in playlists:
             pl_fullpath = pl.uri  #+ pl.uri
-            data.append({'#PROFILE': pl.base_uri + pl.uri})
+            data.append({'{#PROFILE}': pl.base_uri + pl.uri})
         return json.dumps({"data": data})
     else:
         return json.dumps({"data": {'#PROFILE': base_url}})
@@ -38,7 +39,7 @@ def downloadFile(url, directory):
     with open(directory + '/' + localFilename, 'wb') as f:
         start = time.clock()
         r = requests.get(url, stream=True)
-        total_length = r.headers.get('content-length')
+        total_length = int(r.headers.get('content-length'))
         return_list.append({'#TOTAL-LENGTH': total_length})
         dl = 0
         if total_length is None: # no content length header
@@ -67,7 +68,8 @@ def main():
 #    for segment in obj_base_m3u8.segments:
     segment = obj_base_m3u8.segments[0]
     uri = obj_base_m3u8.base_uri + segment.uri
-    data.append({'#TSURI': uri})
+    data.append({'#TSURI': (lambda a : 1 if (a) else 0)(uri) })
+    data.append({'#TARGETDURATION': obj_base_m3u8.target_duration})
     data.append({'#DURATION': segment.duration})
     data.append({'#DOWNLOAD-OPTS': downloadFile(uri, temp_dir)})
     data.append({'#FFPROBE-OPTS': json.loads(getFfprobe(temp_dir + "/" + segment.uri))})
@@ -105,4 +107,3 @@ if action == "-d":
 # Get data
 elif action == "-g":
     print main()
-

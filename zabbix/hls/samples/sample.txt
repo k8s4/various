@@ -1,0 +1,155 @@
+[
+  {
+    "https://testdomain.local/chunklist_b4628000_slru.m3u8": [
+      {
+        "#TSURI": "https://testdomain.local/media-uar785ln3_b4628000_slru_95784.ts"
+      },
+      {
+        "#DURATION": 8
+      },
+      {
+        "#DOWNLOAD-OPTS": [
+          {
+            "#TOTAL-LENGTH": 4870892
+          },
+          {
+            "#AVERAGE-SPEED": 35798623
+          },
+          {
+            "#SPENDED-TIME": 0.11346300000000004
+          }
+        ]
+      },
+      {
+        "#FFPROBE-OPTS": {
+          "streams": [
+            {
+              "index": 0,
+              "codec_name": "timed_id3",
+              "start_pts": 4715383050,
+              "r_frame_rate": "0/0",
+              "start_time": "52393.145000",
+              "time_base": "1/90000",
+              "codec_tag_string": "ID3 ",
+              "codec_type": "data",
+              "disposition": {
+                "comment": 0,
+                "forced": 0,
+                "lyrics": 0,
+                "default": 0,
+                "visual_impaired": 0,
+                "dub": 0,
+                "karaoke": 0,
+                "clean_effects": 0,
+                "timed_thumbnails": 0,
+                "attached_pic": 0,
+                "original": 0,
+                "hearing_impaired": 0
+              },
+              "duration_ts": 720000,
+              "codec_long_name": "timed ID3 metadata",
+              "codec_tag": "0x20334449",
+              "duration": "8.000000",
+              "id": "0x102",
+              "avg_frame_rate": "0/0"
+            },
+            {
+              "pix_fmt": "yuv420p",
+              "sample_aspect_ratio": "1:1",
+              "refs": 1,
+              "codec_type": "video",
+              "coded_height": 1080,
+              "codec_name": "h264",
+              "duration": "8.000000",
+              "is_avc": "false",
+              "codec_time_base": "1/50",
+              "index": 1,
+              "field_order": "progressive",
+              "start_pts": 4715383050,
+              "id": "0x100",
+              "disposition": {
+                "comment": 0,
+                "forced": 0,
+                "lyrics": 0,
+                "default": 0,
+                "visual_impaired": 0,
+                "dub": 0,
+                "karaoke": 0,
+                "clean_effects": 0,
+                "timed_thumbnails": 0,
+                "attached_pic": 0,
+                "original": 0,
+                "hearing_impaired": 0
+              },
+              "width": 1920,
+              "coded_width": 1920,
+              "profile": "High",
+              "chroma_location": "left",
+              "r_frame_rate": "25/1",
+              "start_time": "52393.145000",
+              "time_base": "1/90000",
+              "codec_tag_string": "[27][0][0][0]",
+              "duration_ts": 720000,
+              "codec_long_name": "H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10",
+              "display_aspect_ratio": "16:9",
+              "codec_tag": "0x001b",
+              "height": 1080,
+              "avg_frame_rate": "25/1",
+              "level": 52,
+              "bits_per_raw_sample": "8",
+              "has_b_frames": 0,
+              "nal_length_size": "0"
+            },
+            {
+              "index": 2,
+              "sample_fmt": "fltp",
+              "codec_tag": "0x000f",
+              "start_pts": 4715383050,
+              "bits_per_sample": 0,
+              "r_frame_rate": "0/0",
+              "start_time": "52393.145000",
+              "disposition": {
+                "comment": 0,
+                "forced": 0,
+                "lyrics": 0,
+                "default": 0,
+                "visual_impaired": 0,
+                "dub": 0,
+                "karaoke": 0,
+                "clean_effects": 0,
+                "timed_thumbnails": 0,
+                "attached_pic": 0,
+                "original": 0,
+                "hearing_impaired": 0
+              },
+              "time_base": "1/90000",
+              "codec_tag_string": "[15][0][0][0]",
+              "codec_type": "audio",
+              "channels": 0,
+              "duration": "8.000000",
+              "duration_ts": 720000,
+              "codec_long_name": "AAC (Advanced Audio Coding)",
+              "codec_name": "aac",
+              "id": "0x101",
+              "sample_rate": "0",
+              "codec_time_base": "1/0",
+              "avg_frame_rate": "0/0"
+            }
+          ],
+          "format": {
+            "nb_streams": 3,
+            "start_time": "52393.145000",
+            "format_long_name": "MPEG-TS (MPEG-2 Transport Stream)",
+            "format_name": "mpegts",
+            "filename": "/tmp/media-uar785ln3_b4628000_slru_95784.ts",
+            "bit_rate": "4870892",
+            "nb_programs": 1,
+            "duration": "8.000000",
+            "probe_score": 50,
+            "size": "4870892"
+          }
+        }
+      }
+    ]
+  }
+]
