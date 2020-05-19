@@ -1,0 +1,306 @@
+
+
+INTEGER & WRITING         1 Kb block: 59469.62 Mb/s
+INTEGER & WRITING         2 Kb block: 60101.39 Mb/s
+INTEGER & WRITING         4 Kb block: 60120.36 Mb/s
+INTEGER & WRITING         8 Kb block: 60125.65 Mb/s
+INTEGER & WRITING        16 Kb block: 60065.26 Mb/s
+INTEGER & WRITING        32 Kb block: 60103.60 Mb/s
+INTEGER & WRITING        64 Kb block: 59630.66 Mb/s
+INTEGER & WRITING       128 Kb block: 59317.19 Mb/s
+INTEGER & WRITING       256 Kb block: 59293.57 Mb/s
+INTEGER & WRITING       512 Kb block: 59360.60 Mb/s
+INTEGER & WRITING      1024 Kb block: 59214.71 Mb/s
+INTEGER & WRITING      2048 Kb block: 59028.68 Mb/s
+INTEGER & WRITING      4096 Kb block: 58627.77 Mb/s
+INTEGER & WRITING      8192 Kb block: 57641.02 Mb/s
+INTEGER & WRITING     16384 Kb block: 28328.87 Mb/s
+INTEGER & WRITING     32768 Kb block: 14709.08 Mb/s
+
+
+
+
+INTEGER & READING         1 Kb block: 120279.56 Mb/s
+INTEGER & READING         2 Kb block: 120311.35 Mb/s
+INTEGER & READING         4 Kb block: 120316.65 Mb/s
+INTEGER & READING         8 Kb block: 120087.37 Mb/s
+INTEGER & READING        16 Kb block: 120311.35 Mb/s
+INTEGER & READING        32 Kb block: 119850.19 Mb/s
+INTEGER & READING        64 Kb block: 119830.90 Mb/s
+INTEGER & READING       128 Kb block: 120073.29 Mb/s
+INTEGER & READING       256 Kb block: 120053.93 Mb/s
+INTEGER & READING       512 Kb block: 115833.83 Mb/s
+INTEGER & READING      1024 Kb block: 112013.56 Mb/s
+INTEGER & READING      2048 Kb block: 112918.34 Mb/s
+INTEGER & READING      4096 Kb block: 112499.66 Mb/s
+INTEGER & READING      8192 Kb block: 108015.45 Mb/s
+INTEGER & READING     16384 Kb block: 56769.44 Mb/s
+INTEGER & READING     32768 Kb block: 33547.51 Mb/s
+
+
+
+
+INTEGER   Copy:      20541.34 Mb/s
+INTEGER   Scale:     21108.13 Mb/s
+INTEGER   Add:       20791.81 Mb/s
+INTEGER   Triad:     20748.42 Mb/s
+---
+INTEGER   AVERAGE:   20797.42 Mb/s
+
+
+
+
+
+FL-POINT & WRITING        1 Kb block: 60159.21 Mb/s
+FL-POINT & WRITING        2 Kb block: 60203.86 Mb/s
+FL-POINT & WRITING        4 Kb block: 60055.57 Mb/s
+FL-POINT & WRITING        8 Kb block: 60125.65 Mb/s
+FL-POINT & WRITING       16 Kb block: 59852.41 Mb/s
+FL-POINT & WRITING       32 Kb block: 59994.87 Mb/s
+FL-POINT & WRITING       64 Kb block: 59467.90 Mb/s
+FL-POINT & WRITING      128 Kb block: 59140.76 Mb/s
+FL-POINT & WRITING      256 Kb block: 59185.62 Mb/s
+FL-POINT & WRITING      512 Kb block: 59061.45 Mb/s
+FL-POINT & WRITING     1024 Kb block: 58998.92 Mb/s
+FL-POINT & WRITING     2048 Kb block: 58651.28 Mb/s
+FL-POINT & WRITING     4096 Kb block: 58332.62 Mb/s
+FL-POINT & WRITING     8192 Kb block: 57319.18 Mb/s
+FL-POINT & WRITING    16384 Kb block: 27357.37 Mb/s
+FL-POINT & WRITING    32768 Kb block: 13309.76 Mb/s
+
+
+
+
+FL-POINT & READING        1 Kb block: 113069.52 Mb/s
+FL-POINT & READING        2 Kb block: 115587.04 Mb/s
+FL-POINT & READING        4 Kb block: 117566.02 Mb/s
+FL-POINT & READING        8 Kb block: 117701.15 Mb/s
+FL-POINT & READING       16 Kb block: 117469.92 Mb/s
+FL-POINT & READING       32 Kb block: 114843.27 Mb/s
+FL-POINT & READING       64 Kb block: 116091.55 Mb/s
+FL-POINT & READING      128 Kb block: 115681.71 Mb/s
+FL-POINT & READING      256 Kb block: 116012.63 Mb/s
+FL-POINT & READING      512 Kb block: 111216.70 Mb/s
+FL-POINT & READING     1024 Kb block: 110921.55 Mb/s
+FL-POINT & READING     2048 Kb block: 109018.80 Mb/s
+FL-POINT & READING     4096 Kb block: 107570.09 Mb/s
+FL-POINT & READING     8192 Kb block: 103609.64 Mb/s
+FL-POINT & READING    16384 Kb block: 45385.80 Mb/s
+FL-POINT & READING    32768 Kb block: 32107.36 Mb/s
+
+
+
+
+FL-POINT  Copy:      15437.00 Mb/s
+FL-POINT  Scale:     17967.37 Mb/s
+FL-POINT  Add:       22590.19 Mb/s
+FL-POINT  Triad:     21951.01 Mb/s
+---
+FL-POINT  AVERAGE:   19486.39 Mb/s
+
+
+
+
+
+MMX & WRITING             1 Kb block: 58893.73 Mb/s
+MMX & WRITING             2 Kb block: 59481.28 Mb/s
+MMX & WRITING             4 Kb block: 59559.12 Mb/s
+MMX & WRITING             8 Kb block: 59741.98 Mb/s
+MMX & WRITING            16 Kb block: 57988.66 Mb/s
+MMX & WRITING            32 Kb block: 59777.29 Mb/s
+MMX & WRITING            64 Kb block: 59429.50 Mb/s
+MMX & WRITING           128 Kb block: 59456.24 Mb/s
+MMX & WRITING           256 Kb block: 58649.18 Mb/s
+MMX & WRITING           512 Kb block: 58868.34 Mb/s
+MMX & WRITING          1024 Kb block: 58761.50 Mb/s
+MMX & WRITING          2048 Kb block: 58777.53 Mb/s
+MMX & WRITING          4096 Kb block: 58508.85 Mb/s
+MMX & WRITING          8192 Kb block: 56589.05 Mb/s
+MMX & WRITING         16384 Kb block: 20287.32 Mb/s
+MMX & WRITING         32768 Kb block: 12638.56 Mb/s
+
+
+
+
+MMX & READING             1 Kb block: 116806.64 Mb/s
+MMX & READING             2 Kb block: 119152.90 Mb/s
+MMX & READING             4 Kb block: 113787.26 Mb/s
+MMX & READING             8 Kb block: 118422.57 Mb/s
+MMX & READING            16 Kb block: 118978.11 Mb/s
+MMX & READING            32 Kb block: 117251.35 Mb/s
+MMX & READING            64 Kb block: 118156.12 Mb/s
+MMX & READING           128 Kb block: 118600.88 Mb/s
+MMX & READING           256 Kb block: 117834.90 Mb/s
+MMX & READING           512 Kb block: 118323.37 Mb/s
+MMX & READING          1024 Kb block: 118174.87 Mb/s
+MMX & READING          2048 Kb block: 117823.04 Mb/s
+MMX & READING          4096 Kb block: 116449.65 Mb/s
+MMX & READING          8192 Kb block: 115645.78 Mb/s
+MMX & READING         16384 Kb block: 113796.74 Mb/s
+MMX & READING         32768 Kb block: 97701.77 Mb/s
+
+
+
+
+MMX       Copy:      19955.62 Mb/s
+MMX       Scale:     19205.52 Mb/s
+MMX       Add:       23265.57 Mb/s
+MMX       Triad:     22409.64 Mb/s
+---
+MMX       AVERAGE:   21209.09 Mb/s
+
+
+
+
+
+SSE & WRITING             1 Kb block: 119876.49 Mb/s
+SSE & WRITING             2 Kb block: 119189.30 Mb/s
+SSE & WRITING             4 Kb block: 118395.19 Mb/s
+SSE & WRITING             8 Kb block: 120090.89 Mb/s
+SSE & WRITING            16 Kb block: 120260.13 Mb/s
+SSE & WRITING            32 Kb block: 119095.73 Mb/s
+SSE & WRITING            64 Kb block: 114099.47 Mb/s
+SSE & WRITING           128 Kb block: 116632.02 Mb/s
+SSE & WRITING           256 Kb block: 116505.96 Mb/s
+SSE & WRITING           512 Kb block: 114338.35 Mb/s
+SSE & WRITING          1024 Kb block: 112356.16 Mb/s
+SSE & WRITING          2048 Kb block: 114894.81 Mb/s
+SSE & WRITING          4096 Kb block: 113839.44 Mb/s
+SSE & WRITING          8192 Kb block: 107729.94 Mb/s
+SSE & WRITING         16384 Kb block: 28860.31 Mb/s
+SSE & WRITING         32768 Kb block: 14086.61 Mb/s
+
+
+
+
+SSE & READING             1 Kb block: 240594.44 Mb/s
+SSE & READING             2 Kb block: 235625.74 Mb/s
+SSE & READING             4 Kb block: 240276.88 Mb/s
+SSE & READING             8 Kb block: 240636.84 Mb/s
+SSE & READING            16 Kb block: 240368.53 Mb/s
+SSE & READING            32 Kb block: 236749.32 Mb/s
+SSE & READING            64 Kb block: 238070.33 Mb/s
+SSE & READING           128 Kb block: 237649.04 Mb/s
+SSE & READING           256 Kb block: 238708.55 Mb/s
+SSE & READING           512 Kb block: 238576.46 Mb/s
+SSE & READING          1024 Kb block: 236845.15 Mb/s
+SSE & READING          2048 Kb block: 237016.46 Mb/s
+SSE & READING          4096 Kb block: 235395.53 Mb/s
+SSE & READING          8192 Kb block: 230338.82 Mb/s
+SSE & READING         16384 Kb block: 199052.36 Mb/s
+SSE & READING         32768 Kb block: 187984.76 Mb/s
+
+
+
+
+SSE       Copy:      20098.60 Mb/s
+SSE       Scale:     20180.05 Mb/s
+SSE       Add:       22698.68 Mb/s
+SSE       Triad:     22836.37 Mb/s
+---
+SSE       AVERAGE:   21453.43 Mb/s
+
+
+
+
+
+MMX (nt) & WRITING        1 Kb block: 19977.95 Mb/s
+MMX (nt) & WRITING        2 Kb block: 22185.63 Mb/s
+MMX (nt) & WRITING        4 Kb block: 22276.12 Mb/s
+MMX (nt) & WRITING        8 Kb block: 22397.38 Mb/s
+MMX (nt) & WRITING       16 Kb block: 22446.42 Mb/s
+MMX (nt) & WRITING       32 Kb block: 22583.54 Mb/s
+MMX (nt) & WRITING       64 Kb block: 22473.02 Mb/s
+MMX (nt) & WRITING      128 Kb block: 22316.36 Mb/s
+MMX (nt) & WRITING      256 Kb block: 22366.50 Mb/s
+MMX (nt) & WRITING      512 Kb block: 22388.63 Mb/s
+MMX (nt) & WRITING     1024 Kb block: 22321.47 Mb/s
+MMX (nt) & WRITING     2048 Kb block: 22246.36 Mb/s
+MMX (nt) & WRITING     4096 Kb block: 22301.41 Mb/s
+MMX (nt) & WRITING     8192 Kb block: 22259.18 Mb/s
+MMX (nt) & WRITING    16384 Kb block: 22060.70 Mb/s
+MMX (nt) & WRITING    32768 Kb block: 21777.45 Mb/s
+
+
+
+
+MMX (nt) & READING        1 Kb block: 112223.79 Mb/s
+MMX (nt) & READING        2 Kb block: 109287.87 Mb/s
+MMX (nt) & READING        4 Kb block: 107177.43 Mb/s
+MMX (nt) & READING        8 Kb block: 106279.19 Mb/s
+MMX (nt) & READING       16 Kb block: 105553.41 Mb/s
+MMX (nt) & READING       32 Kb block: 105556.13 Mb/s
+MMX (nt) & READING       64 Kb block: 105868.52 Mb/s
+MMX (nt) & READING      128 Kb block: 106002.77 Mb/s
+MMX (nt) & READING      256 Kb block: 106065.90 Mb/s
+MMX (nt) & READING      512 Kb block: 106068.65 Mb/s
+MMX (nt) & READING     1024 Kb block: 105611.92 Mb/s
+MMX (nt) & READING     2048 Kb block: 106144.24 Mb/s
+MMX (nt) & READING     4096 Kb block: 105518.06 Mb/s
+MMX (nt) & READING     8192 Kb block: 104358.02 Mb/s
+MMX (nt) & READING    16384 Kb block: 102959.84 Mb/s
+MMX (nt) & READING    32768 Kb block: 100473.42 Mb/s
+
+
+
+
+MMX (nt)  Copy:      34854.16 Mb/s  [NTA prefetch]
+MMX (nt)  Scale:     34973.50 Mb/s  [NTA prefetch]
+MMX (nt)  Add:       34144.62 Mb/s  [T0 prefetch]
+MMX (nt)  Triad:     33841.31 Mb/s  [T0 prefetch]
+---
+MMX (nt)  AVERAGE:   34453.40 Mb/s
+
+
+
+
+
+SSE & WRITING (nt)        1 Kb block: 20048.41 Mb/s
+SSE & WRITING (nt)        2 Kb block: 22171.82 Mb/s
+SSE & WRITING (nt)        4 Kb block: 22468.03 Mb/s
+SSE & WRITING (nt)        8 Kb block: 22417.79 Mb/s
+SSE & WRITING (nt)       16 Kb block: 22411.35 Mb/s
+SSE & WRITING (nt)       32 Kb block: 22311.07 Mb/s
+SSE & WRITING (nt)       64 Kb block: 22511.74 Mb/s
+SSE & WRITING (nt)      128 Kb block: 22578.75 Mb/s
+SSE & WRITING (nt)      256 Kb block: 22527.40 Mb/s
+SSE & WRITING (nt)      512 Kb block: 22479.12 Mb/s
+SSE & WRITING (nt)     1024 Kb block: 22288.67 Mb/s
+SSE & WRITING (nt)     2048 Kb block: 22412.58 Mb/s
+SSE & WRITING (nt)     4096 Kb block: 22240.26 Mb/s
+SSE & WRITING (nt)     8192 Kb block: 22183.77 Mb/s
+SSE & WRITING (nt)    16384 Kb block: 22036.02 Mb/s
+SSE & WRITING (nt)    32768 Kb block: 21476.85 Mb/s
+
+
+
+
+SSE & READING (nt)        1 Kb block: 212140.05 Mb/s
+SSE & READING (nt)        2 Kb block: 202236.65 Mb/s
+SSE & READING (nt)        4 Kb block: 196098.14 Mb/s
+SSE & READING (nt)        8 Kb block: 190303.62 Mb/s
+SSE & READING (nt)       16 Kb block: 191116.09 Mb/s
+SSE & READING (nt)       32 Kb block: 192079.53 Mb/s
+SSE & READING (nt)       64 Kb block: 188790.56 Mb/s
+SSE & READING (nt)      128 Kb block: 191558.52 Mb/s
+SSE & READING (nt)      256 Kb block: 190817.82 Mb/s
+SSE & READING (nt)      512 Kb block: 190445.19 Mb/s
+SSE & READING (nt)     1024 Kb block: 189866.96 Mb/s
+SSE & READING (nt)     2048 Kb block: 189231.02 Mb/s
+SSE & READING (nt)     4096 Kb block: 188019.28 Mb/s
+SSE & READING (nt)     8192 Kb block: 186793.14 Mb/s
+SSE & READING (nt)    16384 Kb block: 180763.04 Mb/s
+SSE & READING (nt)    32768 Kb block: 172216.62 Mb/s
+
+
+
+
+SSE (nt)  Copy:      34791.10 Mb/s  [NTA prefetch]
+SSE (nt)  Scale:     34385.13 Mb/s  [NTA prefetch]
+SSE (nt)  Add:       32632.38 Mb/s  [T0 prefetch]
+SSE (nt)  Triad:     32618.35 Mb/s  [T0 prefetch]
+---
+SSE (nt)  AVERAGE:   33606.74 Mb/s
+
+
+
