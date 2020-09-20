@@ -1,0 +1,71 @@
+---
+ - hosts: kube
+   tasks:
+     - name: test copy blayath
+       copy:
+         src: /etc/hosts
+         dest: /etc/hosts
+         owner: root
+         group: root
+         mode: 0644
+
+     - name: Add repository
+       yum_repository:
+         name: kubernetes
+         description: Kube
+         baseurl: https://packages.cloud.google.com/yum/repos/kubernetes-el7-x86_64
+         gpgkey: https://packages.cloud.google.com/yum/doc/yum-key.gpg https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg
+
+     - name: Install Docker, Kubernetes Node, Client
+       yum:
+         name: ['docker', 'yum-plugin-versionlock', 'kubeadm', 'kubectl', 'kubelet']
+         state: present
+         update_cache: True
+
+     - name: Enable needed ports
+       firewalld:
+         port: '{{ item }}'
+         permanent: yes
+         state: enabled
+         immediate: yes
+       loop:
+         - 6443/tcp
+         - 2379-2380/tcp
+         - 10250/tcp
+         - 10251/tcp
+         - 10252/tcp
+         - 10255/tcp
+
+     - name: Disable SWAP since kubernetes can't work with swap enabled (1/2)
+       shell: |
+         swapoff -a
+
+     - name: Disable SWAP in fstab since kubernetes can't work with swap enabled (2/2)
+       replace:
+         path: /etc/fstab
+         regexp: '^([^#].*?\sswap\s+sw.*)'
+         replace: '# \1'
+
+# Set net.bridge.bridge-nf-call-iptables to 1, for FLANNEL (Networking)
+     - sysctl:
+         name: net.bridge.bridge-nf-call-iptables
+         value: '1'
+         sysctl_set: yes
+         state: present
+         reload: yes
+
+     - name: enable and run service Docker
+       systemd:
+         name: '{{ item }}'
+         enabled: yes
+         state: started
+         masked: no
+       loop:
+         - docker
+
+
+# yum versionlock add kubeadm kubectl kubelet
+
+# On master node
+# kubeadm init --pod-network-cidr=10.244.0.0/16
+# ???? kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/bc79dd1505b0c8681ece4de4c0d86c5cd2643275/Documentation/kube-flannel.yml
