@@ -1,0 +1,14 @@
+{% import "message.html" as dialog %}
+{% include "header.html" ignore missing %}
+
+<p>CENTER</p>
+<ul>
+{% for u in users -%}
+    <li>{{ u.name }}
+{% endfor %}
+</ul>
+
+{{ dialog.dialog("Attention", "Someshit happened!!!") }}
+
+{% include "footer.html" ignore missing %}
+
