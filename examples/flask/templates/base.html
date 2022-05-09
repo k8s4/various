@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html><head>
+{% block title %}
+{% if title %}<title>{{ title }}</title>{% else %}<title>Base page</title>{% endif %}
+{% endblock%}
+</head>
+<body>
+{% block content -%}
+	{%- block mainmenu -%}
+	{% if menu -%}
+<ul>
+	{% for i in menu -%}
+<li>{{ i }}</li>
+	{% endfor %}
+</ul>
+	{%- endif %}
+	{% endblock mainmenu -%}
+
+	{% if title -%}
+<h1>{{ title }}! Hello!</h1>
+	{% else -%}
+<h1>base page</h1>
+	{%- endif %}
+{% endblock %}
+</body>
+</html>
