@@ -5,17 +5,27 @@
 # app1 = Flask("app1") 
 # app2 = Flask("app2")
 
-from flask import Flask, render_template, url_for
+from flask import Flask, render_template, url_for, request
 
 app = Flask(__name__)
 
-menu = ["General","Solutions","About"]
+menu = [{"name": "General", "url": "/"},
+        {"name": "Basepage", "url": "/base"},
+        {"name": "Contact", "url": "contact"},
+        {"name": "About", "url": "about"}]
 
 @app.route("/test")
 @app.route("/")
 def index():
     print( url_for("index") )
     return render_template("index.html", title="SuperSite", menu=menu)
+
+@app.route("/contact", methods=["POST", "GET"])
+def contact():
+    if request.method == "POST":
+        print(request.form)
+
+    return render_template("contact.html", title="SuperSite Contact", menu=menu)
 
 @app.route("/base")
 def basepage():
