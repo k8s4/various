@@ -1,0 +1,6 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{{ super() }}
+<p>Page not found (error 404) or not yet made. Return to <a href="{{ url_for('index') }}">main</a>.
+{% endblock %}
