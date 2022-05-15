@@ -2,3 +2,4 @@ push.cmd
 *.exe
 *.lib
 *.dll
+*.sqlite
