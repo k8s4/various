@@ -12,6 +12,7 @@ app.config['SECRET_KEY'] = "edc8492c-d3c6-11ec-a307-a32b5aa2d1d9"
 
 menu = [{"name": "General", "url": "/"},
         {"name": "Sign in", "url": "/login"},
+        {"name": "Post", "url": "/post"},
         {"name": "Contact", "url": "contact"},
         {"name": "About", "url": "about"}]
 

@@ -1,6 +1,7 @@
 import sqlite3 as sql 
 import os
-from flask import Flask, render_template, request, g
+from flask import Flask, render_template, request, g, flash, abort
+from FDataBase import FDataBase
 
 # Configuration
 DATABASE = '/tmp/flask.sqlite'
@@ -32,11 +33,37 @@ def open_db():
         g.link_db = connect_db()
     return g.link_db
 
-
 @app.route("/")
 def index():
     db = open_db()
-    return render_template('index.html', menu = [db])
+    dbase = FDataBase(db)
+    print(dbase.getMenu())
+    return render_template('index.html', menu = dbase.getMenu(), articles=dbase.getPostsAnonce())
+
+@app.route("/post", methods=["POST","GET"])
+def addPost():
+    db = open_db()
+    dbase = FDataBase(db)
+    if request.method == "POST":
+        if len(request.form['name']) > 4 and len(request.form['post']) > 10:
+            res = dbase.addPost(request.form['name'], request.form['post'])
+            if not res:
+                flash('Failed to add new post', category='error')
+            else:
+                flash('Added new post sucessfully', category='success')
+        else:
+            flash('Failed to add new post', category='error')
+    return render_template('post.html', menu = dbase.getMenu(), title='Add new post')
+
+@app.route("/articles/<int:id_post>")
+def getPost(id_post):
+    db = open_db()
+    dbase = FDataBase(db)
+    title, post = dbase.getPost(id_post)
+    print(dbase.getPost(id_post))
+    if not title:
+        abort(404)
+    return render_template('article.html', menu = dbase.getMenu(), title=title, post=post)
 
 @app.teardown_appcontext
 def close_db(error):
@@ -44,6 +71,7 @@ def close_db(error):
         g.link_db.close()
 
 if __name__ == "__main__":
+    create_db()
     app.run(debug=True)
 
 
