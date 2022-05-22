@@ -37,7 +37,6 @@ def open_db():
 def index():
     db = open_db()
     dbase = FDataBase(db)
-    print(dbase.getMenu())
     return render_template('index.html', menu = dbase.getMenu(), articles=dbase.getPostsAnonce())
 
 @app.route("/post", methods=["POST","GET"])
@@ -45,8 +44,8 @@ def addPost():
     db = open_db()
     dbase = FDataBase(db)
     if request.method == "POST":
-        if len(request.form['name']) > 4 and len(request.form['post']) > 10:
-            res = dbase.addPost(request.form['name'], request.form['post'])
+        if len(request.form['name']) > 2 and len(request.form['post']) > 10:
+            res = dbase.addPost(request.form['name'], request.form['post'], request.form['url'])
             if not res:
                 flash('Failed to add new post', category='error')
             else:
@@ -55,12 +54,11 @@ def addPost():
             flash('Failed to add new post', category='error')
     return render_template('post.html', menu = dbase.getMenu(), title='Add new post')
 
-@app.route("/articles/<int:id_post>")
-def getPost(id_post):
+@app.route("/articles/<alias>")
+def getPost(alias):
     db = open_db()
     dbase = FDataBase(db)
-    title, post = dbase.getPost(id_post)
-    print(dbase.getPost(id_post))
+    title, post = dbase.getPost(alias)
     if not title:
         abort(404)
     return render_template('article.html', menu = dbase.getMenu(), title=title, post=post)

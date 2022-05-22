@@ -3,3 +3,4 @@ push.cmd
 *.lib
 *.dll
 *.sqlite
+__pycache__
