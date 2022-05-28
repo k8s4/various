@@ -1,0 +1,19 @@
+<!DOCTYPE xmlmap>
+<xmlmap>
+	<parameters>
+		<name>map</name>
+		<scale>1000</scale>
+		<date>210021111</date>
+	</parameters>
+	<object code="11">
+		<attribute type="100" value="20">
+		<attribute type="200" value="2000">
+		<primitive pointsize="3" name="1">
+			<point lat="37.404113" lon="55.803126" />
+			<point lat="37.504113" lon="55.713236" />
+			<point lat="37.604113" lon="55.613098" />
+			<point lat="37.833143" lon="55.966780" />
+			<point lat="38.001100" lon="55.142375" />
+		</primitive>
+	</object>
+</xmlmap>
