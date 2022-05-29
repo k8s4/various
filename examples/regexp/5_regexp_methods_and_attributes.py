@@ -4,9 +4,12 @@ import re
 # re.search(pattern, string, flags)     # find first entry in oblect
 # re.finditer(pattern, string, flag)    # find all entries in iterable object
 # re.findall(pattern, string, flag)     # find all entries in tuple
+# re.match(pattern, string, flag)       # find entry from first char in string, return object
+# re.split(pattern)                     # split string by pattern
 
 text = "<font color=#DD5566 bg=#101010>"
 match = re.search(r"(\w+)=(#[\da-fA-F]{6})\b", text)
+string = "someshit|shitsome"
 
 # index 0                   - color=#DD5566
 # index 1 (\w+)             - color
@@ -38,3 +41,6 @@ print(match.expand(r"\g<key>:\g<value>"))   # Make yml style from searched group
 
 for match in re.finditer(r"(\w+)=(#[\da-fA-F]{6})\b", text):
     print(match)
+
+match = re.split(r"\|", string) # return list 
+print(match)
