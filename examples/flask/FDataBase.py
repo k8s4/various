@@ -41,8 +41,6 @@ class FDataBase:
             res = self.__cur.fetchone()
             if res: 
                 return res
-            base = url_for('static', filename='images')
-            print("Fuck! " + base)
         except sqlite3.Error as e:
             print("Failed to get article from database " + str(e))
         return (False, False) 
