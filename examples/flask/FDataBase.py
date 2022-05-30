@@ -25,7 +25,7 @@ class FDataBase:
                 return False
             base = url_for('static', filename='images')
             text = re.sub(r"(?P<tag><img\s+[^>]*src=)(?P<quote>[\"'])(?P<url>.+?)(?P=quote)>",
-                        "\\g<tag>" + base + "/\\g<url>",
+                        "\\g<tag>\'" + base + "/\\g<url>\'>",
                         text)
             tm = math.floor(time.time())
             self.__cur.execute("INSERT INTO posts VALUES(null, ?, ?, ?, ?)", (title, text, url, tm))
@@ -41,6 +41,8 @@ class FDataBase:
             res = self.__cur.fetchone()
             if res: 
                 return res
+            base = url_for('static', filename='images')
+            print("Fuck! " + base)
         except sqlite3.Error as e:
             print("Failed to get article from database " + str(e))
         return (False, False) 
