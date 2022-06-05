@@ -3,7 +3,10 @@ import os
 from flask import Flask, render_template, request, g, flash, abort, redirect, url_for
 from FDataBase import FDataBase
 from werkzeug.security import generate_password_hash, check_password_hash
+from flask_login import LoginManager, login_user, login_required
+from UserLogin import UserLogin
 # PBKDF2 - Password-Based Key Derivation Function (sha), Werkzeug
+# Flask-Login
 
 # Configuration
 DATABASE = '/tmp/flask.sqlite'
@@ -14,9 +17,10 @@ app = Flask(__name__)
 
 # Read all vars from tgis file
 app.config.from_object(__name__)
-
 # Redifine database file path to root folder
 app.config.update(dict(DATABASE=os.path.join(app.root_path, 'flsite.sqlite')))
+
+login_manager = LoginManager(app)
 
 def connect_db():
     conn = sql.connect(app.config['DATABASE'])
@@ -40,6 +44,7 @@ def index():
     return render_template('index.html', menu = dbase.getMenu(), articles=dbase.getPostsAnonce())
 
 @app.route("/post", methods=["POST","GET"])
+@login_required
 def addPost():
     if request.method == "POST":
         if len(request.form['name']) > 2 and len(request.form['post']) > 10:
@@ -59,8 +64,16 @@ def getPost(alias):
         abort(404)
     return render_template('article.html', menu = dbase.getMenu(), title=title, post=post)
 
-@app.route("/login")
+@app.route("/login", methods=["POST", "GET"])
 def login():
+    if request.method == "POST":
+        user = dbase.getUserByEmail(request.form['email'])
+        if user and check_password_hash(user['password'], request.form['password']):
+            userlogin = UserLogin().create(user)
+            login_user(userlogin)
+            return redirect(url_for("index"))
+        flash("Login failed, check email and password.", "error")
+
     return render_template("login.html", menu=dbase.getMenu(), title="Sign in")
 
 @app.route("/register", methods=["POST", "GET"])
@@ -80,9 +93,14 @@ def register():
 
     return render_template("register.html", menu=dbase.getMenu(), title="Register")
 
+@login_manager.user_loader
+def load_user(user_id):
+    print("load_user")
+    return UserLogin().fromDB(user_id, dbase)
+
 dbase = None
 @app.before_request
-def before_reauest():
+def before_request():
     global dbase
     db = open_db()
     dbase = FDataBase(db)
