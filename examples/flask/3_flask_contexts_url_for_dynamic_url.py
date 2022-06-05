@@ -67,6 +67,11 @@ def profile(username):
 
     return f"User: {username}\n"
 
+# request contest test
+with app.test_request_context():
+    print( url_for("basepage") )
+    print( url_for("sometest", shit="somesome", page=333) )
+
 @app.errorhandler(404)
 def pageNotFound(error):
     return render_template("404.html", title="Page not found or not yet made", menu=menu), 404
