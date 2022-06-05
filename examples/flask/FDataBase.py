@@ -54,4 +54,24 @@ class FDataBase:
             print("Failed to list articles from database " + str(e))
         return []
 
+    def addUser(self, name, email, hpassword):
+        try:
+            self.__cur.execute(f"SELECT COUNT() as 'count' FROM users WHERE email like '{email}'")
+            res = self.__cur.fetchone()
+            if res["count"] > 0:
+                print("User with the same email already present")
+                return False
+            tm = math.floor(time.time())
+            self.__cur.execute("INSERT INTO users VALUES(NULL, ?, ?, ?, ?)", (name, email, hpassword, tm))
+            self.__db.commit()
+        except sqlite3.Error as e:
+            print("Failed to add new user to database: " + str(e))
+            return False
+        return True
+
+
+
+
+
+
 
