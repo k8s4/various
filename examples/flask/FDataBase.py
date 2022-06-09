@@ -61,8 +61,9 @@ class FDataBase:
             if res["count"] > 0:
                 print("User with the same email already present")
                 return False
+
             tm = math.floor(time.time())
-            self.__cur.execute("INSERT INTO users VALUES(NULL, ?, ?, ?, ?)", (name, email, hpassword, tm))
+            self.__cur.execute("INSERT INTO users VALUES(NULL, ?, ?, ?, NULL, ?)", (name, email, hpassword, tm))
             self.__db.commit()
         except sqlite3.Error as e:
             print("Failed to add new user to database: " + str(e))
@@ -86,7 +87,6 @@ class FDataBase:
         try:
             self.__cur.execute(f"SELECT * FROM users WHERE email LIKE '{email}' LIMIT 1")
             res = self.__cur.fetchone()
-            print(res)
             if not res:
                 print("User not found!")
                 return False
@@ -95,9 +95,17 @@ class FDataBase:
             print("Failed to get users from database: " + str(e))
         return False
 
+    def updateUserAvatar(self, avatar, user_id):
+        if not avatar:
+            return False
 
-
-
-
+        try:
+            binary = sqlite3.Binary(avatar)
+            self.__cur.execute(f"UPDATE users SET avatar = ? WHERE id = ?", (binary, user_id))
+            self.__db.commit()
+        except sqlite3.Error as e:
+            print("Failed to update avatar in database" + str(e))
+            return False
+        return True
 
 
