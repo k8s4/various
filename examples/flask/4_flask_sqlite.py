@@ -5,6 +5,7 @@ from FDataBase import FDataBase
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import LoginManager, login_user, login_required, logout_user, current_user
 from UserLogin import UserLogin
+from Forms import LoginForm
 # PBKDF2 - Password-Based Key Derivation Function (sha), Werkzeug
 # Flask-Login
 
@@ -74,17 +75,28 @@ def getPost(alias):
 def login():
     if current_user.is_authenticated:
         return redirect(url_for('profile'))
-
-    if request.method == "POST":
-        user = dbase.getUserByEmail(request.form['email'])
-        if user and check_password_hash(user['password'], request.form['password']):
+    form = LoginForm()
+    if form.validate_on_submit():
+        user = dbase.getUserByEmail(form.email.data)
+        if user and check_password_hash(user['password'], form.password.data):
             userlogin = UserLogin().create(user)
-            rm = True if request.form.get('remainme') else False
+            rm = form.remember.data
             login_user(userlogin, remember=rm)
             return redirect(request.args.get("next") or url_for("profile"))
         flash("Login failed, check email and password.", "error")
 
-    return render_template("login.html", menu=dbase.getMenu(), title="Sign in")
+    return render_template("login.html", menu=dbase.getMenu(), title="Sign in", form=form)
+
+# if request.method == "POST":
+#        user = dbase.getUserByEmail(request.form['email'])
+#        if user and check_password_hash(user['password'], request.form['password']):
+#            userlogin = UserLogin().create(user)
+#            rm = True if request.form.get('remainme') else False
+#            login_user(userlogin, remember=rm)
+#            return redirect(request.args.get("next") or url_for("profile"))
+#        flash("Login failed, check email and password.", "error")
+#
+#    return render_template("login.html", menu=dbase.getMenu(), title="Sign in")
 
 @app.route("/register", methods=["POST", "GET"])
 def register():
