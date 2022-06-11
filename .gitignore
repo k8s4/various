@@ -2,5 +2,6 @@ push.cmd
 *.exe
 *.lib
 *.dll
+*.swp
 *.sqlite
 __pycache__
