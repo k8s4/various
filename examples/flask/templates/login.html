@@ -7,8 +7,32 @@
 {% endfor %}
 <form action="" method="POST" class="form-contact">
 {{ form.hidden_tag() }}
-<p>{{ form.email.label() }} {{ form.email() }}</p>
-<p>{{ form.password.label() }} {{ form.password() }}</p>
+{#
+<p>{{ form.email.label() }} 
+{% if form.email.errors %}
+  {{ form.email(class="invalid") }}
+<span class="invalid-feedback">
+  {% for e in form.email.errors %}
+  {{ e }}
+  {% endfor %}
+{% else %}
+  {{ form.email() }}</p>
+{% endif %}
+#}
+
+{% for field in form if field.name not in ['csrf_token', 'remember', 'submit'] -%}
+    <p>{{ field.label() }}
+    {% if field.errors %}
+      {{ field(class="invalid") }}
+    <span class="invalid-feedback">
+      {% for e in field.errors %}
+      {{ e }}
+      {% endfor %}
+    {% else %}
+      {{ field() }}</p>
+    {% endif %}
+{% endfor %}
+
 <p>{{ form.remember.label() }} {{ form.remember() }}</p>
 <p>{{ form.submit() }}</p>
 
