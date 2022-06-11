@@ -6,6 +6,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import LoginManager, login_user, login_required, logout_user, current_user
 from UserLogin import UserLogin
 from Forms import LoginForm
+from admin.admin import admin
 # PBKDF2 - Password-Based Key Derivation Function (sha), Werkzeug
 # Flask-Login
 
@@ -21,6 +22,8 @@ app = Flask(__name__)
 app.config.from_object(__name__)
 # Redifine database file path to root folder
 app.config.update(dict(DATABASE=os.path.join(app.root_path, 'flsite.sqlite')))
+
+app.register_blueprint(admin, url_prefix='/admin')
 
 login_manager = LoginManager(app)
 
