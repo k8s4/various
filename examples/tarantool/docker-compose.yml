@@ -1,0 +1,15 @@
+version: '2'
+
+services:
+  tarantool1:
+    image: tarantool/tarantool
+    volumes:
+      - ./app/app.lua:/opt/tarantool/app.lua:rw
+      - ./data:/var/lib/tarantool:rw
+    ports:
+      - "3301:3301"
+
+
+
+
+

@@ -1,0 +1,32 @@
+# Tarantool yeeehhuu
+#
+# sandbox tarantool.io/en/try-dev (is it cartrige???)
+
+# pip3 install tarantool
+# sudo docker-compose up
+# docker exec -ti 266d871cc00f console
+# Space like tabel
+# Tuple like row of table
+
+# Create space
+box.schema.space.create('myspace', {if_not_exists=true})
+
+# Create primary index
+# Index types: TREE, HASH, RTREE(geography index), BITMAP
+box.space.myspace:create_index('primary', {type="TREE", unique=true, if_not_exists=true, parts={1, 'unsigned', 2, 'string'}})
+box.space.myspace:create_index('primary', {type="TREE", unique=true, if_not_exists=true, parts={1, 'unsigned'}})
+
+# Select data
+box.space.myspace.index.primary:select{}
+box.space.myspace:select{} # select by primary too
+
+# Insert data
+box.space.myspace:insert({1, "fuckingshit", 22})
+box.space.myspace:auto_increment({"shit2", 33})
+
+# Update data only by unique data in index
+# Update second column in row with primary index 1
+box.space.myspace:update({1}, ({'=', 2, "some"})
+
+
+
