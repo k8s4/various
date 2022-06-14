@@ -1,0 +1,49 @@
+#  Server IPROTO, server.lua
+box.cfg {
+    listen = '127.0.0.1:3301'
+}
+box.schema.grant('guest', 'pass', nil, nil, {if_not_exists - true})
+require('console').start()
+
+# HTTP Server
+tarantoolctl rocks install http
+local srv = require 'http.server'.new('0.0.0.0', 8080)
+local r = require 'http.server'.new()
+r.route({ path = '/' }, function(req)
+    return {
+        status = 200,
+        body = "Hello Shitty!",
+    }
+end)
+
+srv:set_router(r)
+srv:start()
+
+# Raw sockets
+local client = require 'http.client'
+local response = client.get('http://shitsite.com')
+print(response.status)
+pring(response.body)
+
+# Integrated modules
+clock, http, uri, csv, fun, buffer, digest, crypto, socket, fio, json, yaml, msgpack, iconv, utf8, uuid
+
+
+# Fiber functions
+fiber = require 'fiber'
+fiber.info()
+
+fiber.create(function() 
+    for i=1,3 
+        do print(i)
+    end
+)
+
+# Transfer control
+fiber.yield(), fiber.sleep(T)
+
+# Data channels, like queue, S - max amount messages
+channel = fibec.channel(S)
+message = channel:get()
+channel:put(message)
+

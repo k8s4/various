@@ -1,0 +1,59 @@
+# Functions trash
+
+# Function for select several ids
+function select_several(space_name, index_name, keys)
+    local obj = index_name == nil and box.space[space_name] or box.space[space_name].index[index_name]
+    local result = {}
+    for _, key in pairs(keys) do
+        table.insert(result, obj:get(key))
+    end
+    return result
+end
+select_several('fuckspace', nil, {1, 2})
+
+# Test func for search some string
+function select_string(space_name, index_name, string)
+    local obj = index_name == nil and box.space[space_name] or box.space[space_name].index[index_name]
+    local result = {}
+    for _, key in pairs() do
+        table.insert(result, obj:get(key))
+    end
+    return result
+end
+
+select_several('fuckspace', nil, {1, 2})
+
+# Return all projects by ids from fed table 
+box.space.fed_binds:pairs():map( function(fb) return breeze.models.projects.select.id(fb.federation) end ):totable()
+
+function shit() for _, tuple in box.space.fuckspace:pairs(nil, {iterator = box.index.ALL}) do print(tuple) end end
+
+
+# The answer for search non indexed data
+lua function gsub on 'smth' field of tuple.
+
+#???????
+
+for _, tuple in
+box.space.t.index.primary:pairs("XY",{iterator = "GE"}) do
+  if (string.sub(tuple[1], 1, 2) ~= "XY") then break end
+  print(tuple)
+end
+
+
+
+box.schema.create_space('address')
+box.space.address:create_index('prefix', { type = 'tree', parts = { { 1, 'str', collation = 'unicode_ci' } }, unique = true })
+
+select_by_prefix = function(prefix)
+    local result = {}
+    for _, addr in box.space.address.index.prefix:pairs(prefix, { iterator = 'GT' }) do
+        if utf.casecmp(utf.sub(addr[1], 1, utf.len(prefix)), prefix) == 0 then
+            table.insert(result, addr)
+        else
+            break
+        end
+    end
+    return result
+end
+
