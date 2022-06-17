@@ -2,11 +2,12 @@
 
 {% block content %}
 {{ super() }}
+<p><a href="{{ url_for('admin.index') }}">Admin</a></p>
 <h2>Some Content.......:</h2>
 <ul class="list-posts">
 {% for art in articles %}
 <li>
-	<p class="title"><a href="{{ url_for('getPost', alias=art.url) }}">{{ art.title }}</a></p>
+        <p class="title"><a href="{{ url_for('getPost', alias=art.url) }}">{{ art.title }}</a></p>
 	<p class="annonce">{{ art.text[:50] | striptags }}</p>
 </li>
 {% endfor %}
