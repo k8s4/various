@@ -1,6 +1,17 @@
-ISS - Keep It Simple Stupid
-CRUD - Create Read Update Delete
+KISS - Keep It Simple Stupid
+DRY - Don't Repeat Yourself
+TDD - Test-drive Development
+SOLID
+    Single Responsibility
+    Open Closed
+    Liskov Substitution
+    Interface Segregation
+    Dependency Inversion
+
 DTO - Data Transfer Object
+ORM - Object Relational Mapping (objects to database)
+CRUD - Create Read Update Delete
+SOAP - Simplified Object Access Protocol
 RESTful - Representational State Transfer
     Client - Server Architecture
     Stateless
@@ -9,15 +20,22 @@ RESTful - Representational State Transfer
     multi level structure, proxies, caches, gateways
     code demand
 
-TDD - Test-drive Development
-ORM - Object Relational Mapping (objects to database)
+OOP - Object-Oriented Programming
+    Classes, Objects,
+    Methods, Attributes
+    Encapsulation, Polymorphism,
+    Inheritance, Abstration
+    Dep injection, Interfaces
+
 GoF - Gang of Four (https://bool.dev/blog/detail/gof-design-patterns)
 
 RIA - Rich Internet Application
-SOAP - Simplified Object Access Protocol
 
+GRASP
 
 Metrics
 USE - Utilization, saturation, errors
 RED - Rate, errors, duration
 LTES - Latency, traffic, errors, saturation
+
+
