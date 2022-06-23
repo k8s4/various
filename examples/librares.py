@@ -39,6 +39,10 @@ from flask_login import UserMixi
 from flask_login import LoginManager
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import LoginManager, login_user, login_required, logout_user, current_user
+from flask_httpauth import HTTPBasicAuth
+
+# Flask oauth
+from flask_oauth import OAuth
 
 # Flask Bootstrap from twitter
 from flask_bootstrap import Bootstrap
@@ -48,6 +52,9 @@ from flask_moment import Moment
 
 # Flask Mail
 from flask_mail import Mail, Message
+
+# Flask Script for manage cli
+from flask_script import Manager
 
 # Fask PageDown for gaination
 from flask_pagedown import PageDown
@@ -63,7 +70,7 @@ from flask_sqlalchemy import SQLAlchemy
 # Templaters
 from jinja2 import Template, Environment, FileSystemLoader, FunctionLoader, 
 
-# ???
+# Web markdown
 from markdown import markdown
 import bleach
 

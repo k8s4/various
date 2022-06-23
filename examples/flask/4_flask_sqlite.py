@@ -179,9 +179,7 @@ def close_db(error):
 
 if __name__ == "__main__":
     create_db()
+    print(app.url_map)
     app.run(debug=True)
-
-
-
 
 

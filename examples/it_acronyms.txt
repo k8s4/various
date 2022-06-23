@@ -1,0 +1,23 @@
+ISS - Keep It Simple Stupid
+CRUD - Create Read Update Delete
+DTO - Data Transfer Object
+RESTful - Representational State Transfer
+    Client - Server Architecture
+    Stateless
+    Caching
+    Standard interface
+    multi level structure, proxies, caches, gateways
+    code demand
+
+TDD - Test-drive Development
+ORM - Object Relational Mapping (objects to database)
+GoF - Gang of Four (https://bool.dev/blog/detail/gof-design-patterns)
+
+RIA - Rich Internet Application
+SOAP - Simplified Object Access Protocol
+
+
+Metrics
+USE - Utilization, saturation, errors
+RED - Rate, errors, duration
+LTES - Latency, traffic, errors, saturation
