@@ -42,16 +42,3 @@ formatted_data = formater.prepare()
 writer = FileWriter("test.csv")
 writer.write(formatted_data)
 
-
-
-
-
-
-
-
-
-
-
-
-
-

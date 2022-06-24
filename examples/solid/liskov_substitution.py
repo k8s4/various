@@ -11,7 +11,7 @@ class Cat(Animal):
 
     def eat(self, amount = 0.2):
         if amount > 0.3:
-            print("Cant' eat more stupid!")
+            print("Can't eat more stupid!")
         else:
             print("Cat ate some food!")
 
