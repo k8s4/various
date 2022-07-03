@@ -1,0 +1,23 @@
+Signals:
+
+Useful:
+1 - SIGHUP - reload
+9 - SIGKILL - kill without normal end
+15 - SIGTERM - kill with time to stope some
+
+2 - SIGINT - Stop process, Ctrl-C
+  3 - SIGQUIT - Kill immediately, Ctrl-\
+
+17 - SIGCHLD - schild processes send to parent that he stop
+
+20 - SIGTSTP - Stop process, like pause, Ctrl-Z
+18 - SIGCONT - Continuous process
+
+10, 12 - SIGUSR1, SIGUSR2 
+
+4 - SIGILL - programm exception
+8 - SIGFPE - calculate exception
+11 - SIGSEGV - access to not owned memory area
+
+process have SIG mask
+  threads have sig mask
