@@ -2,7 +2,7 @@
 # domain:5000
 
 # callbacks
-# generators, goroutines
+# generators, coroutines
 # async await
 
 import socket
