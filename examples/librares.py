@@ -18,6 +18,25 @@ import config
 from functools import wraps
 import unittest
 
+# path as obj
+analog - import pathlib, Path, read_text(), write_text(), read_bytes()
+
+# data parse
+import json, load(), dump(),
+import yaml, safe_load(), dump()
+import csv, reader() with next()
+
+# environmets
+os.environ.get('name')
+import subprocess, run()
+
+# args
+sys.argv[]
+import argparse
+import click
+import fire
+
+
 from threading import Thread
 
 # for fake users
