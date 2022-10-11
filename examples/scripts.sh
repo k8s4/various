@@ -11,3 +11,4 @@ echo 2
 #pip freeze > requirements.txt
 #pip intall -r requrements.txt
 
+set +e # -e  Exit immediately if a command exits with a non-zero status.
