@@ -5,3 +5,4 @@ push.cmd
 *.swp
 *.sqlite
 __pycache__
+venv
