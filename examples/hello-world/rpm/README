@@ -1,0 +1,20 @@
+# Generate example package
+
+
+### Make spec
+
+```
+python3 setup.py bdist_rpm --spec-only
+
+sudo yum install rpm-build
+mkdir -p ./centos/{SOURCES,SRPMS,SPECS,RPMS,BUILD}
+cp dist/hello-world-0.0.1.tar.gz ./centos/SOURCES/
+rpmbuild -ba --define "_topdir ./centos" dist/hello-world.spec
+```
+
+### Repos
+```
+sudo yum install createrepo
+
+createrepo -v ./centos/noarch
+```

@@ -1,0 +1,13 @@
+Metadata-Version: 1.1
+Name: Hello-World
+Version: 0.0.1
+Summary: A hello world exampler shit
+Home-page: mysite.shit
+Author: Pitr
+Author-email: pitrpitrov@example.shit
+License: UNKNOWN
+Description: UNKNOWN
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
