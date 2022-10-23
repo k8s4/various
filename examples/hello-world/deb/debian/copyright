@@ -1,0 +1,9 @@
+Format: http://www.debian.org/doc/packaging-manuals/copyright-format/1.0
+Upstream-Name: hello-world
+Source: https://example.com/hello-world
+Files: *
+Copyright: 2022 Pitr
+License: Expat
+License: Expat
+  Some text =)
+

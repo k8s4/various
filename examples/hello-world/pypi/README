@@ -1,0 +1,20 @@
+# Generate example package
+
+
+### Make package
+
+```
+python3 -m venv /path/venv
+source /path/venv
+pip install setuptools twine wheel
+mkdir like hello_world
+python3 setup.py sdist
+```
+
+### Upload package to PyPI
+```
+twine upload --repository-url https://penis.pypi.org/ebanoe_legacy/ dist/Hello_World-0.0.1.tar.gz
+python3 -m pip install --index-url ^^^^^^^^^^^ Hello_World
+```
+
+See also setup.py and Makefile

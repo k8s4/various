@@ -1,0 +1,55 @@
+# Generate example package
+
+
+### Help with make TRUE changelog file
+```
+sudo apt install devscripts
+
+export DEBEMAIL="pitrpitrov@example.shit"
+export DEBFULLNAME="Pitr"
+
+dch --package "hello-world" --create -v 0.0.1 -D stable "New fucking release"
+```
+
+compat file for debhelper
+
+
+### Generate package
+```
+debuild -i -us -uc -b
+
+-us - Unsigned code
+-uc - Unsigned changes
+
+```
+
+### Make repo 
+```
+sudo apt install reprepo
+```
+
+and make dir and file
+mkdir /tmp/repo /tmp/repo/conf /tmp/repo/debian/sid
+vi /tmp/repo/conf/distributions
+```
+Codename: sid
+Origin: eample.com
+Label: example.com
+Architectures: amd64 source
+DscIndices: Source Release .gz .bz2
+DscIndices: Packages Release . .gz .bz2
+Components: main
+Suite: stable
+Description: shit example for hello world
+Contents: .gz .bz2
+```
+
+And make repo:
+```
+reprepo --confdir /tmp/repo/conf/distributions -b /tmp/repo/debian/sid \
+-C main includedeb sid /source/of/fucking/hello-world_0.0.1_all.deb
+```
+For attach:
+```
+deb [trusted=yes] http://o.my.shit.example.com:8880/ sid main
+```

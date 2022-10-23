@@ -1,0 +1,16 @@
+Source: hello-world
+Maintainer: Pitr <pitrpitrov@example.shit>
+Section: python
+Priority: optional
+Build-Depends:
+ debhelper (>= 11~),
+ dh-python,
+ python3-all,
+ python3-setuptools
+Standards-Version: 4.3.0
+
+Package: python3-hello-world
+Architecture: all
+Depends: ${misc:Depends}, ${python3:Depends}
+Description: Some shit example hello-world python package
+
