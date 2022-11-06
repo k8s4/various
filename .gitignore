@@ -6,3 +6,4 @@ push.cmd
 *.sqlite
 __pycache__
 venv
+*.ps1
