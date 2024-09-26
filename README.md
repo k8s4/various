@@ -12,3 +12,5 @@ Directory **zabbix** have some special templates for monitoring broadcast env.
 2. Scripts for special task, move some ACL and create Groups in **Acitive Directory**
 3. PHP lillte html page for **Rozet WFS (Harmonic)**
 4. And several scripts on vbs and PS...
+
+Thanks!
