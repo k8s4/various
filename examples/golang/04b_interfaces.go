@@ -44,19 +44,24 @@ func (p *Phone) Send(msg string) error {
 	return nil
 }
 
-func Notify(s Sender) {
-	err := s.Send("Notify message")
-	if err != nil {
-		fmt.Println(err)
+func Notify(i interface{}) {
+	switch i.(type) {
+	case int:
+			fmt.Println("Int not supported...")
+	}
+
+	s, ok := i.(Sender)
+	if !ok {
+		fmt.Println("Can't make interface")
 		return
 	}
-	switch s.(type) {
-	case *Email:
-		fmt.Println("Sucksess to email")
-	case *Phone:
-		phone := s.(*Phone)
-		fmt.Println(phone.Balance)
+
+	err := s.Send("Empty message fom interface")
+	if err != nil {
+		fmt.Println("Error")
+		return
 	}
+	fmt.Println("Success")
 }
 
 func main() {
@@ -65,6 +70,27 @@ func main() {
 
 	phone := &Phone{100500, 300}
 	Notify(phone)
+
+	Notify(2)
+	Notify("Strinnnnggg")
+
+	some := [3]int64{1,2,3}
+	Notify(some)
 }
 
+
+func OldNotify(s Sender) {
+        err := s.Send("Notify message")
+        if err != nil {
+                fmt.Println(err)
+                return
+        }
+        switch s.(type) {
+        case *Email:
+                fmt.Println("Sucksess to email")
+        case *Phone:
+                phone := s.(*Phone)
+                fmt.Println(phone.Balance)
+        }
+}
 
