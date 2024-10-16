@@ -22,6 +22,6 @@ func collatzSequence(x int) {
 func main() {
 	var number int = 1000000
 	for i := number; i != 1; i-- {
-	 	go collatzSequence(i)
+		go collatzSequence(i)
 	}
 }

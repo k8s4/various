@@ -33,6 +33,11 @@ func Distinct[T comparable](list []T) []T {
 	return result
 }
 
+// Swap any type
+func Swap[T any](a, b *T) {
+    *a, *b = *b, *a
+}
+
 func PrintAny(items []any) {
     for _, item := range items {
         fmt.Printf("%v ", item)
