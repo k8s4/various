@@ -10,6 +10,9 @@ func main() {
 	fmt.Println("Started test servers.")
 //	server.TCPServer()
 //	server.UDPServer()
+//	server.HTTPServer()
 //	client.TCPClient()
-	client.UDPClient()
+//	client.UDPClient()
+	client.HTTPClientGet()
+	client.HTTPClientHeaderGet()
 }
