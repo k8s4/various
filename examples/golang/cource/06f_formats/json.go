@@ -84,7 +84,7 @@ func CreateJson() string {
 }
 
 func LoadAndParceJson() {
-	jsonData, err := os.ReadFile("example.json")
+	jsonData, err := os.ReadFile("examples/example.json")
 	fmt.Println(err)
 	var request Request
 	fmt.Println(json.Unmarshal(jsonData, &request))
@@ -92,14 +92,14 @@ func LoadAndParceJson() {
 }
 
 func LoadAndParseRawMsgToMap() {
-	jsonData, _ := os.ReadFile("example.json")
+	jsonData, _ := os.ReadFile("examples/example.json")
 	var objmap map[string]interface{}
 	json.Unmarshal(jsonData, &objmap)
 	fmt.Println(objmap)
 }
 
 func LoadAndParseRawMsg() {
-	jsonData, _ := os.ReadFile("example.json")
+	jsonData, _ := os.ReadFile("examples/example.json")
 	var objmap map[string]json.RawMessage
 	json.Unmarshal(jsonData, &objmap)
 	fmt.Println(objmap)
@@ -109,7 +109,7 @@ func LoadAndParseRawMsg() {
 }
 
 func LoadAndParseJsonToCustomStruct() {
-	jsonData, err := os.ReadFile("custom.json")
+	jsonData, err := os.ReadFile("examples/custom.json")
 	fmt.Println(err)
 	var request RequestTagged
 	fmt.Println(json.Unmarshal(jsonData, &request))
