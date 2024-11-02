@@ -1,0 +1,10 @@
+Relational DataBase Management System (RDBMS): PostgreSQL, MySQL, Oracle
+Document-oriented NoSQL database: MongoDB, CouchDB
+Key-Value store: Redis, etcd, memcached
+Wide database: 
+  Column-oriented database management system: Clickhouse
+  Row-oriented storage: Cassandra
+Search database: Solr, Splunk, ElasticSearch
+Graph Database management: Neo4j, Virtuoso, OrientDB
+Time seried database: TimescaleDB, Influx, Prometheus
+Etc: GeoMesa, QLDB, SpaceTime, SparkleDB
