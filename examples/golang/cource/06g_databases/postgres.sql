@@ -4,7 +4,7 @@ CREATE TABLE users (
     rank VARCHAR(255)
 );
 
-CREATE UNIQUE INDEX users_id_uindex ON cars(id);
+CREATE UNIQUE INDEX users_id_uindex ON users(id);
 
 CREATE TABLE cars (
     id SERIAL PRIMARY KEY,
