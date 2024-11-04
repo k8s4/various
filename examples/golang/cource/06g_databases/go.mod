@@ -4,6 +4,7 @@ go 1.23.2
 
 require (
 	github.com/georgysavva/scany v1.2.2
+	github.com/gomodule/redigo v1.9.2
 	github.com/jackc/pgx/v4 v4.18.3
 	go.mongodb.org/mongo-driver v1.17.1
 )
