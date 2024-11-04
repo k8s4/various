@@ -1,0 +1,7 @@
+use db
+db.createCollection("numbers")
+db.numbers.insert({brand:"JAC", license_plate:"JKK902"})
+db.numbers.insert({item:"some", price:"300"})
+
+db.getCollection('numbers').find({}) 
+db.numbers.find().pretty()

@@ -22,4 +22,6 @@ services:
       MONGO_INITDB_DATABASE: master
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: some 
+    ports:
+      - "27017:27017"
 
