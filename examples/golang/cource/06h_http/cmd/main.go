@@ -2,13 +2,15 @@ package main
 
 import (
 	"context"
-	"golang/cource/06h_http/internals/app"
-	"golang/cource/06h_http/internals/cfg"
 	"os"
 	"os/signal"
 
 	log "github.com/sirupsen/logrus"
+
+	"golang/cource/06h_http/internals/app"
+	"golang/cource/06h_http/internals/cfg"
 )
+
 func main() {
 	config := cfg.LoadAndStoreConfig()
 
