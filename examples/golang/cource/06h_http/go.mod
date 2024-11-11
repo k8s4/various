@@ -3,7 +3,7 @@ module 06h_http
 go 1.23
 
 require (
-	github.com/georgysavva/scany v0.2.9
+	github.com/georgysavva/scany v1.2.2
 	github.com/gorilla/mux v1.8.0
 	github.com/jackc/pgx/v4 v4.18.3
 	github.com/sirupsen/logrus v1.9.3
@@ -12,6 +12,7 @@ require (
 
 require (
 	github.com/fsnotify/fsnotify v1.7.0 // indirect
+	github.com/georgysavva/scany/v2 v2.1.3 // indirect
 	github.com/hashicorp/hcl v1.0.0 // indirect
 	github.com/jackc/chunkreader/v2 v2.0.1 // indirect
 	github.com/jackc/pgconn v1.14.3 // indirect
@@ -20,7 +21,9 @@ require (
 	github.com/jackc/pgproto3/v2 v2.3.3 // indirect
 	github.com/jackc/pgservicefile v0.0.0-20221227161230-091c0ba34f0a // indirect
 	github.com/jackc/pgtype v1.14.0 // indirect
+	github.com/jackc/pgx/v5 v5.0.0 // indirect
 	github.com/jackc/puddle v1.3.0 // indirect
+	github.com/jackc/puddle/v2 v2.0.0 // indirect
 	github.com/magiconair/properties v1.8.7 // indirect
 	github.com/mitchellh/mapstructure v1.5.0 // indirect
 	github.com/pelletier/go-toml/v2 v2.2.2 // indirect

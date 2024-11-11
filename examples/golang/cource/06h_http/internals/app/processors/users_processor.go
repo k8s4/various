@@ -2,6 +2,7 @@ package processors
 
 import (
 	"errors"
+	"golang/cource/06h_http/internals/app/models"
 )
 
 type UsersProcessor struct {

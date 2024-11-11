@@ -1,6 +1,7 @@
 package processors
 
 import (
+	"06h_http/internals/app/models"
 	"errors"
 )
 
