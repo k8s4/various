@@ -4,24 +4,24 @@ import (
 	"context"
 	"fmt"
 
-	"golang/cource/06h_http/internals/app/models"
+	"06h_http/internals/app/models"
 
 	"github.com/georgysavva/scany/pgxscan"
 	"github.com/jackc/pgx/v4/pgxpool"
 	log "github.com/sirupsen/logrus"
 )
 
-type UserStorage struct {
+type UsersStorage struct {
 	databasePool *pgxpool.Pool
 }
 
-func NewUsersStorage(pool *pgxpool.Pool) *UserStorage {
-	storage := new(UserStorage)
+func NewUsersStorage(pool *pgxpool.Pool) *UsersStorage {
+	storage := new(UsersStorage)
 	storage.databasePool = pool
 	return storage
 }
 
-func (storage *UserStorage) GetUsersList(nameFilter string) []models.User {
+func (storage *UsersStorage) GetUsersList(nameFilter string) []models.User {
 	query := "SELECT id, name, rank FROM users"
 	args := make([]interface{}, 0)
 	if nameFilter != "" {
@@ -39,7 +39,7 @@ func (storage *UserStorage) GetUsersList(nameFilter string) []models.User {
 	return result
 }
 
-func (storage *UserStorage) GetUserById(id int64) models.User {
+func (storage *UsersStorage) GetUserById(id int64) models.User {
 	query := "SELECT id, name, rank FROM users WHERE id = $1"
 
 	var result models.User
@@ -52,7 +52,7 @@ func (storage *UserStorage) GetUserById(id int64) models.User {
 	return result
 }
 
-func (storage *UserStorage) CreateUser(user models.User) error {
+func (storage *UsersStorage) CreateUser(user models.User) error {
 	query := "INSERT INTO users(name, rank) VALUES ($1, $2)"
 
 	_, err := storage.databasePool.Exec(context.Background(), query, user.Name, user.Rank)

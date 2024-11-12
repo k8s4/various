@@ -86,7 +86,7 @@ func (storage *CarsStorage) GetCarsList(userIdFilter int64, brandFilter string, 
 	return result
 }
 
-func (storage *CarsStorage) GetCarsById(id int64) models.Car {
+func (storage *CarsStorage) GetCarById(id int64) models.Car {
 	query := "SELECT users.id AS userid, users.name, users.rank, c.id, c.brand, c.colour, c.license_plate " +
 		"FROM users JOIN cars c on users.id = c.user_id WHERE c.id = $1"
 

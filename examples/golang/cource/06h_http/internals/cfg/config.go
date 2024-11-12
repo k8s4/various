@@ -1,8 +1,9 @@
 package cfg
 
 import(
-	log "github.com/sirupsen/logrus"
+	"fmt"
 	"github.com/spf13/viper"
+	log "github.com/sirupsen/logrus"
 )
 
 type Cfg struct {
@@ -26,7 +27,7 @@ func LoadAndStoreConfig() Cfg {
 
 	var cfg Cfg
 
-	err := attr.Unmarshal(%cfg)
+	err := attr.Unmarshal(&cfg)
 	if err != nil {
 		log.Panic(err)
 	}
@@ -34,5 +35,5 @@ func LoadAndStoreConfig() Cfg {
 }
 
 func (cfg *Cfg) GetDBString() string {
-	retrun fmt.Sprintf("postgres://%v:%v@%v:%v/%v", cfg.DbUser, cfg.DbPass, cfg.DbHost, cfg.DbPort, cfg.DbName)
+	return fmt.Sprintf("postgres://%v:%v@%v:%v/%v", cfg.DbUser, cfg.DbPass, cfg.DbHost, cfg.DbPort, cfg.DbName)
 }

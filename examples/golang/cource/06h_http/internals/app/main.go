@@ -2,8 +2,14 @@ package app
 
 import (
 	"context"
-	"golang/cource/06h_http/internals/cfg"
-	"log"
+	"06h_http/internals/cfg"
+	"06h_http/internals/app/db"
+	"06h_http/internals/app/processors"
+	"06h_http/internals/app/handlers"
+	"06h_http/api"
+	"06h_http/api/middleware"
+
+	log "github.com/sirupsen/logrus"
 	"net/http"
 
 	"github.com/jackc/pgx/v4/pgxpool"
@@ -26,7 +32,7 @@ func NewServer(config cfg.Cfg, ctx context.Context) *AppServer {
 func (server *AppServer) Serve() {
 	log.Println("Startung server")
 	log.Println(server.config.GetDBString())
-	server.db, err := pgxpool.Connect(server.ctx, server.config.GetDBString())
+	server.db, err = pgxpool.Connect(server.ctx, server.config.GetDBString())
 	if err != nil {
 		log.Fatalln(err)
 	}

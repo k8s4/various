@@ -2,6 +2,7 @@ package processors
 
 import (
 	"06h_http/internals/app/models"
+	"06h_http/internals/app/db"
 	"errors"
 )
 
@@ -33,7 +34,7 @@ func (processor *CarsProcessor) CreateCar(car models.Car) error {
 }
 
 func (processor *CarsProcessor) FindCar(id int64) (models.Car, error) {
-	user := processor.storage.GetCarById(id)
+	car := processor.storage.GetCarById(id)
 	if car.Id != id {
 		return car, errors.New("Car not found.")
 	}

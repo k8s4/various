@@ -1,7 +1,7 @@
 package api
 
 import (
-	"golang/cource/06h_http/internals/app/handlers"
+	"06h_http/internals/app/handlers"
 
 	"github.com/gorilla/mux"
 )

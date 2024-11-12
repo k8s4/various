@@ -3,7 +3,8 @@ package handlers
 import (
 	"encoding/json"
 	"errors"
-	"golang/cource/06h_http/internals/app/processors"
+	"06h_http/internals/app/processors"
+	"06h_http/internals/app/models"
 	"net/http"
 	"strconv"
 	"strings"
@@ -22,7 +23,7 @@ func NewCarsHandler(processor *processors.CarsProcessor) *CarsHandler {
 }
 
 func (handler *CarsHandler) Create(response http.ResponseWriter, request *http.Request) {
-	var newCar models.Cars
+	var newCar models.Car
 	err := json.NewDecoder(request.Body).Decode(&newCar)
 	if err != nil {
 		WrapError(response, err)
@@ -54,8 +55,7 @@ func (handler *CarsHandler) List(response http.ResponseWriter, request *http.Req
 			return
 		}
 	}
-	list, err := handler.processor.ListCars(userIdFilter, strings.Trim(vars.Get("brand"), "\""),
-		strings.Trim(vars.Get("colour"), "\""), strings.Trim(vars.Get("license_plate"), "\""))
+	list, err := handler.processor.ListCars(userIdFilter, strings.Trim(vars.Get("brand"), "\""), strings.Trim(vars.Get("colour"), "\""), strings.Trim(vars.Get("license_plate"), "\""))
 	if err != nil {
 		WrapError(response, err)
 	}

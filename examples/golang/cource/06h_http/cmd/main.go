@@ -7,8 +7,8 @@ import (
 
 	log "github.com/sirupsen/logrus"
 
-	"golang/cource/06h_http/internals/app"
-	"golang/cource/06h_http/internals/cfg"
+	"06h_http/internals/app"
+	"06h_http/internals/cfg"
 )
 
 func main() {

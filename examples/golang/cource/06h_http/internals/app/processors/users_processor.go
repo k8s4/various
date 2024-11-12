@@ -2,7 +2,8 @@ package processors
 
 import (
 	"errors"
-	"golang/cource/06h_http/internals/app/models"
+	"06h_http/internals/app/models"
+	"06h_http/internals/app/db"
 )
 
 type UsersProcessor struct {
@@ -32,5 +33,5 @@ func (processor *UsersProcessor) FindUser(id int64) (models.User, error) {
 }
 
 func (processor *UsersProcessor) ListUsers(nameFilter string) ([]models.User, error) {
-	return processor.storage.GetUserList(nameFilter), nil
+	return processor.storage.GetUsersList(nameFilter), nil
 }

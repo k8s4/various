@@ -3,7 +3,8 @@ package handlers
 import (
 	"encoding/json"
 	"errors"
-	"golang/cource/06h_http/internals/app/processors"
+	"06h_http/internals/app/processors"
+	"06h_http/internals/app/models"
 	"net/http"
 	"strconv"
 	"strings"
