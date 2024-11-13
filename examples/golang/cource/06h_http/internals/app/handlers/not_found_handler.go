@@ -6,5 +6,5 @@ import (
 )
 
 func NotFound(response http.ResponseWriter, request *http.Request) {
-	WrapErrorWithStatus(response, errors.New("Not found Handler"), http.StatusNotFound)
+	WrapErrorWithStatus(response, errors.New("not found Handler"), http.StatusNotFound)
 }

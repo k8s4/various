@@ -1,8 +1,8 @@
 package processors
 
 import (
-	"06h_http/internals/app/models"
 	"06h_http/internals/app/db"
+	"06h_http/internals/app/models"
 	"errors"
 )
 
@@ -18,16 +18,16 @@ func NewCarsProcessor(storage *db.CarsStorage) *CarsProcessor {
 
 func (processor *CarsProcessor) CreateCar(car models.Car) error {
 	if car.Colour == "" {
-		return errors.New("Colour should not be empty.")
+		return errors.New("colour should not be empty")
 	}
 	if car.Brand == "" {
-		return errors.New("Brand should not be empty.")
+		return errors.New("brand should not be empty")
 	}
 	if car.LicensePlate == "" {
-		return errors.New("License place should not be empty.")
+		return errors.New("license place should not be empty")
 	}
 	if car.Owner.Id <= 0 {
-		return errors.New("Owner id shall be filled")
+		return errors.New("owner id shall be filled")
 	}
 
 	return processor.storage.CreateCar(car)
@@ -36,7 +36,7 @@ func (processor *CarsProcessor) CreateCar(car models.Car) error {
 func (processor *CarsProcessor) FindCar(id int64) (models.Car, error) {
 	car := processor.storage.GetCarById(id)
 	if car.Id != id {
-		return car, errors.New("Car not found.")
+		return car, errors.New("car not found")
 	}
 
 	return car, nil

@@ -1,10 +1,10 @@
 package handlers
 
 import (
+	"06h_http/internals/app/models"
+	"06h_http/internals/app/processors"
 	"encoding/json"
 	"errors"
-	"06h_http/internals/app/processors"
-	"06h_http/internals/app/models"
 	"net/http"
 	"strconv"
 	"strings"
@@ -62,7 +62,7 @@ func (handler *UsersHandler) List(response http.ResponseWriter, request *http.Re
 func (handler *UsersHandler) Find(response http.ResponseWriter, request *http.Request) {
 	vars := mux.Vars(request)
 	if vars["id"] == "" {
-		WrapError(response, errors.New("Missing ID."))
+		WrapError(response, errors.New("missing ID"))
 		return
 	}
 

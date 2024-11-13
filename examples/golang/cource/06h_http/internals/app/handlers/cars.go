@@ -1,10 +1,10 @@
 package handlers
 
 import (
+	"06h_http/internals/app/models"
+	"06h_http/internals/app/processors"
 	"encoding/json"
 	"errors"
-	"06h_http/internals/app/processors"
-	"06h_http/internals/app/models"
 	"net/http"
 	"strconv"
 	"strings"
@@ -49,7 +49,7 @@ func (handler *CarsHandler) List(response http.ResponseWriter, request *http.Req
 	var userIdFilter int64 = 0
 	if vars.Get("userid") != "" {
 		var err error
-		userIdFilter, err := strconv.ParseInt(vars.Get("userid"), 10, 64)
+		userIdFilter, err = strconv.ParseInt(vars.Get("userid"), 10, 64)
 		if err != nil {
 			WrapError(response, err)
 			return
@@ -71,7 +71,7 @@ func (handler *CarsHandler) List(response http.ResponseWriter, request *http.Req
 func (handler *CarsHandler) Find(response http.ResponseWriter, request *http.Request) {
 	vars := mux.Vars(request)
 	if vars["id"] == "" {
-		WrapError(response, errors.New("Missing ID."))
+		WrapError(response, errors.New("missing ID"))
 		return
 	}
 

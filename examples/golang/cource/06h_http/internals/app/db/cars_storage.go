@@ -39,7 +39,7 @@ func convertJoinedQueryToCar(input userCar) models.Car {
 	}
 }
 
-func NewCarStorage(pool *pgxpool.Pool) *CarsStorage {
+func NewCarsStorage(pool *pgxpool.Pool) *CarsStorage {
 	storage := new(CarsStorage)
 	storage.databasePool = pool
 	return storage
@@ -124,7 +124,7 @@ func (storage *CarsStorage) CreateCar(car models.Car) error {
 	}
 
 	if id == -1 {
-		errors.New("User not found.")
+		return errors.New("User not found.")
 	}
 
 	insertQuery := "INSERT INTO cars(user_id, colour, brand, license_plate) VALUES ($1, $2, $3, $4)"

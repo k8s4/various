@@ -1,9 +1,9 @@
 package processors
 
 import (
-	"errors"
-	"06h_http/internals/app/models"
 	"06h_http/internals/app/db"
+	"06h_http/internals/app/models"
+	"errors"
 )
 
 type UsersProcessor struct {
@@ -18,7 +18,7 @@ func NewUsersProcessor(storage *db.UsersStorage) *UsersProcessor {
 
 func (processor *UsersProcessor) CreateUser(user models.User) error {
 	if user.Name == "" {
-		return errors.New("Name should not be empty.")
+		return errors.New("name should not be empty")
 	}
 	return processor.storage.CreateUser(user)
 }
@@ -26,7 +26,7 @@ func (processor *UsersProcessor) CreateUser(user models.User) error {
 func (processor *UsersProcessor) FindUser(id int64) (models.User, error) {
 	user := processor.storage.GetUserById(id)
 	if user.Id != id {
-		return user, errors.New("User not found.")
+		return user, errors.New("user not found")
 	}
 
 	return user, nil
