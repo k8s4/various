@@ -19,7 +19,7 @@ type userCar struct {
 	UserId       int64 `db:"userid"`
 	Name         string
 	Rank         string
-	CarId        int64 `db:"carid"`
+	CarId        int64 `db:"id"`
 	Brand        string
 	Colour       string
 	LicensePlate string
@@ -46,7 +46,7 @@ func NewCarsStorage(pool *pgxpool.Pool) *CarsStorage {
 }
 
 func (storage *CarsStorage) GetCarsList(userIdFilter int64, brandFilter string, colourFilter string, licenseFilter string) []models.Car {
-	query := "SELECT users.id AS userid, users.name, users.rank, c.id as carid, c.brand, c.colour, c.licens_plate " +
+	query := "SELECT users.id AS userid, users.name, users.rank, c.id as carid, c.brand, c.colour, c.license_plate " +
 		"FROM users JOIN cars c on users.id = c.user_id WHERE 1=1"
 	placeholderNum := 1
 	args := make([]interface{}, 0)
@@ -104,19 +104,18 @@ func (storage *CarsStorage) CreateCar(car models.Car) error {
 	ctx := context.Background()
 	tx, err := storage.databasePool.Begin(ctx)
 	defer func() {
-		err = tx.Rollback(ctx)
+		err = tx.Rollback(context.Background())
 		if err != nil {
 			log.Errorln(err)
 		}
 	}()
-
 	query := "SELECT id FROM users WHERE id = $1"
 	id := -1
 
 	err = pgxscan.Get(ctx, tx, &id, query, car.Owner.Id)
 	if err != nil {
 		log.Errorln(err)
-		err = tx.Rollback(ctx)
+		err = tx.Rollback(context.Background())
 		if err != nil {
 			log.Errorln(err)
 		}
@@ -124,7 +123,7 @@ func (storage *CarsStorage) CreateCar(car models.Car) error {
 	}
 
 	if id == -1 {
-		return errors.New("User not found.")
+		return errors.New("user not found")
 	}
 
 	insertQuery := "INSERT INTO cars(user_id, colour, brand, license_plate) VALUES ($1, $2, $3, $4)"
@@ -132,12 +131,12 @@ func (storage *CarsStorage) CreateCar(car models.Car) error {
 	_, err = tx.Exec(ctx, insertQuery, car.Owner.Id, car.Colour, car.Brand, car.LicensePlate)
 	if err != nil {
 		log.Errorln(err)
-		err = tx.Rollback(ctx)
+		err = tx.Rollback(context.Background())
 		if err != nil {
 			log.Errorln(err)
 		}
 	}
-	err = tx.Commit(ctx)
+	err = tx.Commit(context.Background())
 	if err != nil {
 		log.Errorln(err)
 	}

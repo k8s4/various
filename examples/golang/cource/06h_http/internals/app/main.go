@@ -40,8 +40,8 @@ func (server *AppServer) Serve() {
 	}
 	defer database.Close()
 
-	carsStorage := db.NewCarsStorage(server.db)
-	usersStorage := db.NewUsersStorage(server.db)
+	carsStorage := db.NewCarsStorage(database)
+	usersStorage := db.NewUsersStorage(database)
 
 	carsProcessor := processors.NewCarsProcessor(carsStorage)
 	usersProcessor := processors.NewUsersProcessor(usersStorage)
@@ -62,7 +62,6 @@ func (server *AppServer) Serve() {
 	if err != nil {
 		log.Fatalln(err)
 	}
-
 	return
 }
 
