@@ -1,0 +1,9 @@
+gofmt - standart style linter
+go vet - standart checker
+staticcheck - improved checker
+golint - Developed golang team
+goconst - Literals and numbers checker
+errcheck - error checker
+fieldalignment - memory optimizer
+
+golangci-lint - Go linters runner

@@ -6,6 +6,10 @@ import (
 	"github.com/gorilla/mux"
 )
 
+// examples 
+// curl -X POST localhost:8080/users/create -d '{"name":"Dick Eggers", "rank":"Cleaner"}'
+// curl  -X POST localhost:8080/cars/create -d '{"colour":"Orange", "brand":"Chevrolet", "license_plate":"FF443", "Owner":{"id":1}}' 
+//
 func CreateRoutes(userHandler *handlers.UsersHandler, carsHandler *handlers.CarsHandler) *mux.Router {
 	router := mux.NewRouter()
 	router.HandleFunc("/users/create", userHandler.Create).Methods("POST")
