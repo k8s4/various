@@ -1,9 +1,13 @@
+# Profile
 go tool pprof pprof.out
 go tool pprof -http=:8080 pprof.out
 
 top 
 list <func> // list main.fib
 
+
+# Tarce
 go tool trace trace.out
 
-
+# Race detection
+go run --race <file.go>
