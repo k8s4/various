@@ -7,15 +7,16 @@ output:
 linters:
   enable-all: true
   disable:
-    - stylecheck
-    - revive
-    - wsl
-    - gofmt
-    - gosimple
-    - gofumpt
-    - goimports
-    - nlreturn
+      #    - stylecheck
+      #    - revive  
+      #    - wsl
+      #    - gofmt
+      #    - gosimple
+      #    - gofumpt
+      #    - goimports
+      #    - nlreturn
     - exportloopref
+    - mnd
   fast: false
 
 issues:
