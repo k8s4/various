@@ -1,0 +1,25 @@
+
+output:
+  formats: colored-line-number
+  print-issued-lines: true
+  print-linter-name: true
+
+linters:
+  enable-all: true
+  disable:
+    - stylecheck
+    - revive
+    - wsl
+    - gofmt
+    - gosimple
+    - gofumpt
+    - goimports
+    - nlreturn
+    - exportloopref
+  fast: false
+
+issues:
+  exclude-use-default: false
+  max-issues-per-linter: 100
+  max-same-issues: 4
+  nes: false

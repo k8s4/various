@@ -68,7 +68,6 @@ func (storage *CarsStorage) GetCarsList(userIdFilter int64, brandFilter string, 
 	if licenseFilter != "" {
 		query += fmt.Sprintf(" AND license_plate LIKE $%d", placeholderNum)
 		args = append(args, fmt.Sprintf("%%%s%%", licenseFilter))
-		placeholderNum++
 	}
 
 	var dbResult []userCar

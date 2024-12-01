@@ -62,7 +62,6 @@ func (server *AppServer) Serve() {
 	if err != nil {
 		log.Fatalln(err)
 	}
-	return
 }
 
 func (server *AppServer) Shutdown() {
@@ -79,8 +78,4 @@ func (server *AppServer) Shutdown() {
 	}
 
 	log.Println("Server exited properly.")
-
-	if err == http.ErrServerClosed {
-		err = nil
-	}
 }
